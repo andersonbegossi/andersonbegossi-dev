@@ -1,4 +1,5 @@
 import type { Locale } from '@/lib/i18n/locale';
+import { siteConfig } from '@/lib/site-config';
 
 export type Project = {
   slug: string;
@@ -61,7 +62,7 @@ export const projects: readonly Project[] = [
     },
     tech: ['Next.js', 'MDX', 'i18n'],
     placeholder: { en: 'site screenshot', pt: 'screenshot do site' },
-    github: 'https://github.com/andersonbegossi/abegossi',
+    github: siteConfig.repo,
   },
 ];
 

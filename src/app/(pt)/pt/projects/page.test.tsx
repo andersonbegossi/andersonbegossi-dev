@@ -26,6 +26,15 @@ describe('Portuguese Projects screen', () => {
     const githubLinks = within(main).getAllByRole('link', { name: /GitHub/ });
     expect(githubLinks).toHaveLength(1);
     expect(githubLinks[0]).toHaveAttribute('href', 'https://github.com/andersonbegossi/abegossi');
+    expect(
+      within(screen.getByRole('article', { name: 'begossi.dev' })).getByRole('link', {
+        name: /GitHub/,
+      }),
+    ).toBe(githubLinks[0]);
+
     expect(within(main).queryByRole('link', { name: /Demo/ })).not.toBeInTheDocument();
+    for (const link of within(main).getAllByRole('link')) {
+      expect(link.getAttribute('href')).not.toMatch(/ambegossi|apps\.apple\.com/);
+    }
   });
 });

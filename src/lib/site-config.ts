@@ -9,6 +9,8 @@ export const siteConfig = {
   author: 'Anderson Begossi',
   email: 'andersonbegossi@gmail.com',
   github: 'https://github.com/andersonbegossi',
+  /** This site's own repository — public, so the begossi.dev project card links to it. */
+  repo: 'https://github.com/andersonbegossi/abegossi',
   linkedin: 'https://linkedin.com/in/andersonbegossi-b5065a130',
   /** Not the design's bamse.com.br, which is NXDOMAIN — this is the live site. */
   employer: { name: 'Bamse', url: 'https://www.bamse.co/' },
