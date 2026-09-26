@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { formatPostDate, postPath } from '@/lib/blog/format';
+import { loadPosts } from '@/lib/blog/posts';
 import { featuredProjects } from '@/lib/data/projects';
 import { getDictionary } from '@/lib/i18n';
 import { localePath, type Locale } from '@/lib/i18n/locale';
@@ -9,6 +11,7 @@ import styles from './home-screen.module.css';
 /** The Home screen body, rendered by the routed page of each locale. */
 export function HomeScreen({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
+  const recentPosts = loadPosts(locale).slice(0, 3);
 
   return (
     <div className={styles.screen}>
@@ -86,6 +89,27 @@ export function HomeScreen({ locale }: { locale: Locale }) {
             </Link>
           ))}
         </div>
+      </section>
+
+      <section aria-labelledby="recent-writing" className={styles.writing}>
+        <div className={styles.sectionHead}>
+          <h2 id="recent-writing" className={styles.sectionTitle}>
+            {t.home.recentWriting}
+          </h2>
+          <Link href={localePath('/blog', locale)} className={styles.viewAll}>
+            {t.home.viewAll} →
+          </Link>
+        </div>
+        <ul className={styles.posts}>
+          {recentPosts.map((post) => (
+            <li key={post.slug}>
+              <Link href={postPath(post.slug, locale)} className={styles.post}>
+                <span className={styles.postTitle}>{post.title}</span>
+                <span className={styles.postDate}>{formatPostDate(post.date, locale)}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   );

@@ -196,3 +196,42 @@
   font-size: 11.5px;
   color: var(--faint);
 }
+
+.writing {
+  margin-top: 64px;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.post {
+  padding: 14px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.postTitle {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+
+.postTitle:hover {
+  color: var(--accent);
+}
+
+.postDate {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--faint);
+  flex: none;
+}

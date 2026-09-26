@@ -49,4 +49,23 @@ describe('Portuguese Home screen', () => {
       '/pt/projects',
     );
   });
+
+  it('previews the three most recent Portuguese posts', () => {
+    renderRoute(<HomePage />, PT_HOME);
+
+    const writing = screen.getByRole('region', { name: 'Artigos' });
+    const posts = within(writing).getAllByRole('listitem');
+
+    expect(posts).toHaveLength(3);
+    expect(within(posts[0]).getByRole('link')).toHaveAttribute('href', '/pt/blog/sharing-code');
+    expect(posts[0]).toHaveTextContent(
+      'Compartilhando código entre três apps React Native em produção',
+    );
+    expect(posts[0]).toHaveTextContent('12 jun 2026');
+    expect(posts[2]).toHaveTextContent('9 fev 2026');
+    expect(within(writing).getByRole('link', { name: /Ver todos/ })).toHaveAttribute(
+      'href',
+      '/pt/blog',
+    );
+  });
 });
