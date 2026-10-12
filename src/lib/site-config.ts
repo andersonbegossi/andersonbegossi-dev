@@ -10,7 +10,7 @@ export const siteConfig = {
   github: 'https://github.com/andersonbegossi',
   /** This site's own repository — public, so the andersonbegossi.dev project card links to it. */
   repo: 'https://github.com/andersonbegossi/andersonbegossi-dev',
-  linkedin: 'https://linkedin.com/in/andersonbegossi-b5065a130',
+  linkedin: 'https://www.linkedin.com/in/andersonbegossi',
   /** Not the design's bamse.com.br, which is NXDOMAIN — this is the live site. */
   employer: { name: 'Bamse', url: 'https://www.bamse.co/' },
   resumePdf: '/Anderson-Begossi-Resume.pdf',

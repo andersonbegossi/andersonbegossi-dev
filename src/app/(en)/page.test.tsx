@@ -47,7 +47,7 @@ describe('Home screen', () => {
     );
     expect(within(hero).getByRole('link', { name: /LinkedIn/ })).toHaveAttribute(
       'href',
-      'https://linkedin.com/in/andersonbegossi-b5065a130',
+      'https://www.linkedin.com/in/andersonbegossi',
     );
   });
 

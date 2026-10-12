@@ -27,7 +27,7 @@ and clients: SEO and shareable URLs are requirements, not nice-to-haves.
 ## Fixed facts
 
 - GitHub account for all public links: **`andersonbegossi`** (not `ambegossi`).
-- LinkedIn: `linkedin.com/in/andersonbegossi-b5065a130` · Email: `andersonbegossi@gmail.com`.
+- LinkedIn: `linkedin.com/in/andersonbegossi` · Email: `andersonbegossi@gmail.com`.
 - Domain: **`andersonbegossi.dev`** (not the design's `begossi.dev`), served from Vercel.
   The canonical base URL is a single site-config constant.
 - Assets pulled from the design project are served from `public/`:
