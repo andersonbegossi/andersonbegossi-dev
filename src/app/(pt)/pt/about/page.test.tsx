@@ -14,13 +14,12 @@ describe('Portuguese About screen', () => {
     expect(screen.getByText(/Tenho foco em performance/)).toBeInTheDocument();
   });
 
-  it('offers the resume PDF under a Portuguese label', () => {
+  it('offers the Portuguese resume PDF under a Portuguese label', () => {
     renderRoute(<AboutPage />, PT_ABOUT);
 
-    expect(screen.getByRole('link', { name: /Baixar currículo/ })).toHaveAttribute(
-      'href',
-      '/Anderson-Begossi-Resume.pdf',
-    );
+    const download = screen.getByRole('link', { name: /Baixar currículo/ });
+    expect(download).toHaveAttribute('href', '/Anderson-Begossi-Curriculo.pdf');
+    expect(download).toHaveAttribute('download', 'Anderson-Begossi-Curriculo.pdf');
   });
 
   it('lists the four jobs in Portuguese', () => {
@@ -32,7 +31,9 @@ describe('Portuguese About screen', () => {
     expect(jobs).toHaveLength(4);
     expect(within(jobs[0]).getByText('2022 — atual')).toBeInTheDocument();
     expect(within(jobs[0]).getByText('Bamse · Blumenau, SC (remoto)')).toBeInTheDocument();
-    expect(within(jobs[0]).getByText(/Implementei pagamento via Pix/)).toBeInTheDocument();
+    expect(
+      within(jobs[0]).getByText(/Implementei o fluxo de pagamento via Pix/),
+    ).toBeInTheDocument();
     expect(
       within(jobs[3]).getByRole('heading', { name: 'Pesquisador de Iniciação Científica' }),
     ).toBeInTheDocument();
@@ -47,7 +48,7 @@ describe('Portuguese About screen', () => {
       within(skills)
         .getAllByRole('heading', { level: 3 })
         .map((group) => group.textContent),
-    ).toEqual(['Mobile', 'Frontend', 'Backend', 'Linguagens', 'Ferramentas']);
+    ).toEqual(['Mobile', 'Frontend', 'Backend', 'Arquitetura', 'Linguagens', 'Ferramentas']);
     expect(within(skills).getByText('Acessibilidade')).toBeInTheDocument();
   });
 
@@ -60,7 +61,7 @@ describe('Portuguese About screen', () => {
 
     const education = screen.getByRole('region', { name: 'Formação' });
     expect(within(education).getByText('Bacharelado em Ciência da Computação')).toBeInTheDocument();
-    expect(within(education).getByText('Bootcamp GoStack — Rocketseat')).toBeInTheDocument();
+    expect(within(education).getByText('Bootcamp GoStack 10 — Rocketseat')).toBeInTheDocument();
   });
 
   it('marks Sobre as the active nav item', () => {

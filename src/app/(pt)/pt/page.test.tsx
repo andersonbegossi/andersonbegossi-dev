@@ -28,7 +28,8 @@ describe('Portuguese Home screen', () => {
     renderRoute(<HomePage />, PT_HOME);
 
     const download = screen.getByRole('link', { name: /Baixar currículo/ });
-    expect(download).toHaveAttribute('href', '/Anderson-Begossi-Resume.pdf');
+    expect(download).toHaveAttribute('href', '/Anderson-Begossi-Curriculo.pdf');
+    expect(download).toHaveAttribute('download', 'Anderson-Begossi-Curriculo.pdf');
     expect(screen.getByRole('link', { name: /Fale comigo/ })).toHaveAttribute(
       'href',
       '/pt/contact',

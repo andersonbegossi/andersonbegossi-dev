@@ -32,14 +32,20 @@ describe('About screen', () => {
     ).toBeInTheDocument();
     expect(within(jobs[0]).getByText('2022 — now')).toBeInTheDocument();
     expect(within(jobs[0]).getByText('Bamse · Blumenau, BR (remote)')).toBeInTheDocument();
-    expect(within(jobs[0]).getAllByRole('listitem')).toHaveLength(4);
-    expect(within(jobs[1]).getAllByRole('listitem')).toHaveLength(2);
-    expect(within(jobs[2]).getAllByRole('listitem')).toHaveLength(2);
+    expect(within(jobs[0]).getAllByRole('listitem')).toHaveLength(7);
+    expect(within(jobs[1]).getAllByRole('listitem')).toHaveLength(3);
+    expect(
+      within(jobs[2]).getByRole('heading', {
+        level: 3,
+        name: 'Full-stack Developer (React / React Native / Node.js)',
+      }),
+    ).toBeInTheDocument();
+    expect(within(jobs[2]).getAllByRole('listitem')).toHaveLength(4);
     expect(within(jobs[3]).getByText('UCS · Caxias do Sul, BR')).toBeInTheDocument();
-    expect(within(jobs[3]).getAllByRole('listitem')).toHaveLength(1);
+    expect(within(jobs[3]).getAllByRole('listitem')).toHaveLength(2);
   });
 
-  it('groups the skills into five chip rows', () => {
+  it('groups the skills into six chip rows', () => {
     renderRoute(<AboutPage />, '/about');
 
     const skills = screen.getByRole('region', { name: 'Skills & technologies' });
@@ -49,6 +55,7 @@ describe('About screen', () => {
       'Mobile',
       'Frontend',
       'Backend',
+      'Architecture',
       'Languages',
       'Tooling',
     ]);
@@ -57,7 +64,17 @@ describe('About screen', () => {
       within(tooling)
         .getAllByRole('listitem')
         .map((chip) => chip.textContent),
-    ).toEqual(['Jest', 'Firebase', 'GitHub Actions', 'Turborepo', 'NPM', 'Claude Code']);
+    ).toEqual([
+      'Git',
+      'GitHub Actions',
+      'Turborepo',
+      'Firebase',
+      'Jest',
+      'NPM',
+      'Claude Code',
+      'Jupyter Notebook',
+      'Matplotlib',
+    ]);
   });
 
   it('shows the spoken languages with their level', () => {
@@ -68,10 +85,10 @@ describe('About screen', () => {
     expect(within(languages).getByText('Portuguese')).toBeInTheDocument();
     expect(within(languages).getByText('— native')).toBeInTheDocument();
     expect(within(languages).getByText('English')).toBeInTheDocument();
-    expect(within(languages).getByText('— intermediate')).toBeInTheDocument();
+    expect(within(languages).getByText('— basic to intermediate')).toBeInTheDocument();
   });
 
-  it('shows the degree and the certifications', () => {
+  it('shows the degree, the thesis and the certifications', () => {
     renderRoute(<AboutPage />, '/about');
 
     const education = screen.getByRole('region', { name: 'Education' });
@@ -80,7 +97,8 @@ describe('About screen', () => {
     expect(
       within(education).getByText('UCS — Universidade de Caxias do Sul · 2015–2021'),
     ).toBeInTheDocument();
-    expect(within(education).getByText('GoStack Bootcamp — Rocketseat')).toBeInTheDocument();
+    expect(within(education).getByText(/Thesis: mobile app prototype/)).toBeInTheDocument();
+    expect(within(education).getByText('GoStack 10 Bootcamp — Rocketseat')).toBeInTheDocument();
     expect(within(education).getByText('Complete Web Design — Origamid')).toBeInTheDocument();
   });
 

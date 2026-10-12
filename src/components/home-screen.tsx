@@ -51,8 +51,8 @@ export function HomeScreen({ locale }: { locale: Locale }) {
 
         <div className={styles.actions}>
           <a
-            href={siteConfig.resumePdf}
-            download={siteConfig.resumeFileName}
+            href={siteConfig.resume[locale].href}
+            download={siteConfig.resume[locale].fileName}
             className={styles.primaryAction}
           >
             {t.home.downloadResume} ↓

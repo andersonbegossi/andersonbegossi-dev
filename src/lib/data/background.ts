@@ -16,14 +16,16 @@ export type Background = {
   experience: readonly Job[];
   skills: readonly SkillGroup[];
   languages: readonly SpokenLanguage[];
+  thesis: string;
   certifications: readonly string[];
 };
 
 /**
- * Anderson's career, as the About screen lists it. Copied verbatim
- * from the design snapshot's `experience`, `skills`, `languages` and
- * `certifications` in both locales; typed per locale so a missing translation
- * is a compile error, as with the dictionaries.
+ * Anderson's career, as the About screen lists it. Mirrors his LinkedIn
+ * profile (linkedin.com/in/andersonbegossi) — the same positions, bullets,
+ * skills, languages and certifications — and so does the resume PDF, built by
+ * `scripts/build-resume.py`; change all three together. Typed per locale so a
+ * missing translation is a compile error, as with the dictionaries.
  */
 export const background: Record<Locale, Background> = {
   en: {
@@ -34,10 +36,13 @@ export const background: Record<Locale, Background> = {
         company: 'Bamse',
         location: 'Blumenau, BR (remote)',
         bullets: [
-          'Build and maintain the Dental Cremer, Dental Speed and Utilidades Clínicas apps (Henry Schein — NASDAQ:HSIC), used by thousands of users with a 4.9/5 average rating.',
-          'Shipped Pix payments in checkout, virtual try-on, voice search, and biometric, social and two-factor authentication.',
-          'Cut development time ~30% by extracting shared private NPM libraries and a Styled Components design system used by all three apps.',
-          'Helped migrate from multi-repo to a monorepo and improved accessibility with screen-reader support.',
+          'Build and maintain the Dental Cremer, Dental Speed and Utilidades Clínicas apps (Henry Schein — NASDAQ:HSIC) with React Native, used by thousands of users and rated 4.9★ on the stores.',
+          'Built product detail, voice search, biometric, social and two-factor authentication, and virtual try-on, integrating internal APIs and native features with a focus on performance, security and maintainability.',
+          'Implemented Pix payments in checkout, integrating the app with internal APIs for a secure, reliable and optimized purchase flow.',
+          'Implemented the Design System shared by the three apps with Styled Components, for component reuse, visual consistency and faster development.',
+          'Improved accessibility with screen-reader support and other good practices, making navigation more inclusive.',
+          'Cut development time by ~30% and increased code reuse across the apps by creating shared private libraries for components, themes and business rules.',
+          'Helped migrate the apps to a monorepo, cutting setup, development and maintenance time, centralizing shared libraries, standardizing project structure and simplifying dependency management.',
         ],
       },
       {
@@ -46,18 +51,21 @@ export const background: Record<Locale, Background> = {
         company: 'Softaliza',
         location: 'Santa Maria, BR (remote)',
         bullets: [
-          'Built event hotsites, configuration panel, registration flow and streaming module for the Ciente Studio events platform.',
-          'Integrated the Zoom API for reliable live streams; modernized and maintained the Camobi Segura app.',
+          'Built strategic features for the Ciente Studio events platform — event hotsites, hotsite configuration panel, registration flow and streaming module — focused on scalability, performance and maintainability.',
+          'Integrated Ciente Studio with Zoom through its APIs, enabling reliable and stable live streams.',
+          'Upgraded and maintained the Camobi Segura app, modernizing dependencies, shipping fixes and improving its stability and reliability.',
         ],
       },
       {
         period: '2020 — 2021',
-        role: 'Full-stack Developer (React / Node.js)',
+        role: 'Full-stack Developer (React / React Native / Node.js)',
         company: 'Zion Tech',
-        location: 'Caxias do Sul, BR (remote)',
+        location: 'Caxias do Sul, BR (remote, part-time)',
         bullets: [
-          'Built the Você + Saúde health-tracking app in React Native and its Node.js / AdonisJS backend service.',
-          'Created the Stewart Acid-Base clinical decision-support app and a Next.js landing page focused on performance and SEO.',
+          'Built the Você + Saúde health-tracking app in React Native, focused on performance, quality and maintainability.',
+          'Built a Node.js / AdonisJS backend service that centralizes API communication with secure, scalable integrations.',
+          'Built a responsive Next.js landing page applying performance, SEO and responsiveness best practices to support user acquisition.',
+          'Built the Stewart Acid-Base app, a clinical decision-support tool for healthcare professionals with reliable calculations and an intuitive interface.',
         ],
       },
       {
@@ -66,7 +74,8 @@ export const background: Record<Locale, Background> = {
         company: 'UCS',
         location: 'Caxias do Sul, BR',
         bullets: [
-          'Built a nanonewton-scale force measurement system with a quartz piezoelectric sensor and Python scripts; presented at the XXVII UCS Young Researchers Meeting.',
+          'Built a nanonewton-scale force measurement system with a quartz piezoelectric sensor and Python scripts, enabling high-precision measurements for experimental applications.',
+          'Presented the piezoelectric sensor project at the XXVII UCS Young Researchers Meeting.',
         ],
       },
     ],
@@ -77,20 +86,39 @@ export const background: Record<Locale, Background> = {
       },
       {
         label: 'Frontend',
-        items: ['React', 'Next.js', 'Redux', 'Styled Components', 'Design Systems'],
+        items: ['React', 'Next.js', 'Redux', 'Styled Components', 'Material UI', 'Design Systems'],
       },
-      { label: 'Backend', items: ['Node.js', 'AdonisJS', 'REST APIs'] },
+      {
+        label: 'Backend',
+        items: ['Node.js', 'AdonisJS', 'REST APIs', 'Google Cloud (GCP)', 'Speech-to-Text'],
+      },
+      {
+        label: 'Architecture',
+        items: ['Software Architecture', 'Domain-Driven Design', 'Monorepos'],
+      },
       { label: 'Languages', items: ['TypeScript', 'JavaScript', 'Python'] },
       {
         label: 'Tooling',
-        items: ['Jest', 'Firebase', 'GitHub Actions', 'Turborepo', 'NPM', 'Claude Code'],
+        items: [
+          'Git',
+          'GitHub Actions',
+          'Turborepo',
+          'Firebase',
+          'Jest',
+          'NPM',
+          'Claude Code',
+          'Jupyter Notebook',
+          'Matplotlib',
+        ],
       },
     ],
     languages: [
       { name: 'Portuguese', level: 'native' },
-      { name: 'English', level: 'intermediate' },
+      { name: 'English', level: 'basic to intermediate' },
     ],
-    certifications: ['GoStack Bootcamp — Rocketseat', 'Complete Web Design — Origamid'],
+    thesis:
+      'Thesis: mobile app prototype to support children with dyslexia (React Native, Node.js, DDD, Google Speech-to-Text)',
+    certifications: ['GoStack 10 Bootcamp — Rocketseat', 'Complete Web Design — Origamid'],
   },
   pt: {
     experience: [
@@ -100,10 +128,13 @@ export const background: Record<Locale, Background> = {
         company: 'Bamse',
         location: 'Blumenau, SC (remoto)',
         bullets: [
-          'Desenvolvo e mantenho os apps da Dental Cremer, Dental Speed e Utilidades Clínicas (Henry Schein — NASDAQ:HSIC), usados por milhares de usuários com avaliação média de 4,9/5.',
-          'Implementei pagamento via Pix no checkout, provador virtual, busca por voz e autenticação biométrica, social e em dois fatores (2FA).',
-          'Reduzi o tempo de desenvolvimento em ~30% criando bibliotecas privadas no NPM e um Design System com Styled Components compartilhado entre os três apps.',
-          'Contribuí na migração de multirrepositórios para monorepo e aprimorei a acessibilidade com suporte a leitores de tela.',
+          'Desenvolvo e mantenho os aplicativos mobile da Dental Cremer, Dental Speed e Utilidades Clínicas (Henry Schein — NASDAQ:HSIC) com React Native, utilizados por milhares de usuários e com avaliação média de 4,9★ nas lojas.',
+          'Desenvolvi funcionalidades estratégicas como tela de detalhes do produto, busca por voz, autenticação biométrica, social e em dois fatores (2FA) e provador virtual, integrando APIs internas e recursos nativos com foco em desempenho, segurança e manutenibilidade.',
+          'Implementei o fluxo de pagamento via Pix no checkout, integrando o aplicativo às APIs internas em um fluxo seguro, confiável e otimizado para o processo de compra.',
+          'Implementei o Design System compartilhado entre os três aplicativos com Styled Components, promovendo reutilização de componentes, consistência visual e maior produtividade.',
+          'Aprimorei a acessibilidade dos aplicativos com suporte a leitores de tela e outras boas práticas, tornando a navegação mais inclusiva.',
+          'Reduzi o tempo de desenvolvimento em ~30% e aumentei a reutilização de código entre os aplicativos, criando bibliotecas privadas compartilhadas para componentes, temas e regras de negócio.',
+          'Contribuí para a migração dos aplicativos para um monorepo, reduzindo o tempo de setup, desenvolvimento e manutenção, centralizando bibliotecas compartilhadas, padronizando a estrutura dos projetos e simplificando o gerenciamento de dependências.',
         ],
       },
       {
@@ -112,18 +143,21 @@ export const background: Record<Locale, Background> = {
         company: 'Softaliza',
         location: 'Santa Maria, RS (remoto)',
         bullets: [
-          'Desenvolvi hotsites de eventos, painel de configuração, fluxo de inscrição e módulo de transmissão para a plataforma Ciente Studio.',
-          'Integrei a API do Zoom para transmissões ao vivo confiáveis; modernizei e mantive o app Camobi Segura.',
+          'Desenvolvi funcionalidades estratégicas para a plataforma de eventos Ciente Studio — hotsites de eventos, painel de configuração de hotsites, fluxo de inscrição e módulo de transmissão — com foco em escalabilidade, desempenho e manutenibilidade.',
+          'Implementei a integração do Ciente Studio com o Zoom via APIs, viabilizando transmissões ao vivo de forma confiável e estável.',
+          'Realizei a atualização tecnológica e a manutenção do aplicativo Camobi Segura, modernizando dependências, implementando correções e aumentando sua estabilidade e confiabilidade.',
         ],
       },
       {
         period: '2020 — 2021',
-        role: 'Desenvolvedor Full-stack (React / Node.js)',
+        role: 'Desenvolvedor Full-stack (React / React Native / Node.js)',
         company: 'Zion Tech',
-        location: 'Caxias do Sul, RS (remoto)',
+        location: 'Caxias do Sul, RS (remoto, meio período)',
         bullets: [
-          'Desenvolvi o app Você + Saúde em React Native e seu backend em Node.js / AdonisJS.',
-          'Criei o app Stewart Acid-Base, de apoio à decisão clínica, e uma landing page em Next.js focada em performance e SEO.',
+          'Desenvolvi o aplicativo Você + Saúde em React Native, com funcionalidades de acompanhamento de saúde focadas em desempenho, qualidade e manutenibilidade.',
+          'Desenvolvi um serviço backend com Node.js e AdonisJS, centralizando a comunicação com APIs e implementando integrações seguras e escaláveis.',
+          'Desenvolvi uma landing page responsiva com Next.js, aplicando boas práticas de performance, SEO e responsividade para apoiar a aquisição de usuários.',
+          'Desenvolvi o aplicativo Stewart Acid-Base, ferramenta de apoio à decisão clínica para profissionais de saúde, com cálculos confiáveis e interface intuitiva.',
         ],
       },
       {
@@ -132,7 +166,8 @@ export const background: Record<Locale, Background> = {
         company: 'UCS',
         location: 'Caxias do Sul, RS',
         bullets: [
-          'Desenvolvi um sistema de medição de forças em nanonewtons com sensor piezoelétrico de quartzo e Python; apresentei no XXVII Encontro de Jovens Pesquisadores da UCS.',
+          'Desenvolvi um sistema de medição de forças na ordem de nanonewtons com sensor piezoelétrico de quartzo e scripts em Python, viabilizando medições de alta precisão para aplicações experimentais.',
+          'Apresentei o projeto do sensor piezoelétrico no XXVII Encontro de Jovens Pesquisadores da UCS.',
         ],
       },
     ],
@@ -143,20 +178,39 @@ export const background: Record<Locale, Background> = {
       },
       {
         label: 'Frontend',
-        items: ['React', 'Next.js', 'Redux', 'Styled Components', 'Design Systems'],
+        items: ['React', 'Next.js', 'Redux', 'Styled Components', 'Material UI', 'Design Systems'],
       },
-      { label: 'Backend', items: ['Node.js', 'AdonisJS', 'APIs REST'] },
+      {
+        label: 'Backend',
+        items: ['Node.js', 'AdonisJS', 'APIs REST', 'Google Cloud (GCP)', 'Speech-to-Text'],
+      },
+      {
+        label: 'Arquitetura',
+        items: ['Arquitetura de Software', 'Domain-Driven Design', 'Monorepos'],
+      },
       { label: 'Linguagens', items: ['TypeScript', 'JavaScript', 'Python'] },
       {
         label: 'Ferramentas',
-        items: ['Jest', 'Firebase', 'GitHub Actions', 'Turborepo', 'NPM', 'Claude Code'],
+        items: [
+          'Git',
+          'GitHub Actions',
+          'Turborepo',
+          'Firebase',
+          'Jest',
+          'NPM',
+          'Claude Code',
+          'Jupyter Notebook',
+          'Matplotlib',
+        ],
       },
     ],
     languages: [
       { name: 'Português', level: 'nativo' },
-      { name: 'Inglês', level: 'intermediário' },
+      { name: 'Inglês', level: 'básico a intermediário' },
     ],
-    certifications: ['Bootcamp GoStack — Rocketseat', 'Web Design Completo — Origamid'],
+    thesis:
+      'TCC: protótipo de aplicativo para o auxílio de crianças com dislexia (React Native, Node.js, DDD, Google Speech-to-Text)',
+    certifications: ['Bootcamp GoStack 10 — Rocketseat', 'Web Design Completo — Origamid'],
   },
 };
 

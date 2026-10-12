@@ -7,15 +7,15 @@ import styles from './about-screen.module.css';
 /** The About screen body, rendered by the routed page of each locale. */
 export function AboutScreen({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
-  const { experience, skills, languages, certifications } = background[locale];
+  const { experience, skills, languages, thesis, certifications } = background[locale];
 
   return (
     <div className={styles.screen}>
       <div className={styles.head}>
         <h1 className={styles.title}>{t.about.title}</h1>
         <a
-          href={siteConfig.resumePdf}
-          download={siteConfig.resumeFileName}
+          href={siteConfig.resume[locale].href}
+          download={siteConfig.resume[locale].fileName}
           className={styles.download}
         >
           {t.about.downloadResume} ↓
@@ -95,6 +95,7 @@ export function AboutScreen({ locale }: { locale: Locale }) {
           <p className={styles.school}>
             {education.school} · {education.years}
           </p>
+          <p className={styles.school}>{thesis}</p>
           <div className={styles.certifications}>
             {certifications.map((certification) => (
               <p key={certification} className={styles.certification}>

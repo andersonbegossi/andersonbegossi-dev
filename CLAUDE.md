@@ -17,6 +17,7 @@ yarn test        # vitest run
 yarn test:watch
 yarn check       # biome lint + format check
 yarn check:fix   # biome autofix (what lint-staged runs on commit)
+uv run scripts/build-resume.py   # rebuild both resume PDFs in public/ (en + pt)
 ```
 
 Single test file / single case:
@@ -57,6 +58,9 @@ Formspree for contact, ADR 0004).
 - `src/lib/i18n/locale.ts` — the only place that knows the `/pt` prefix. `localePath` builds a
   locale's URL for a *screen path* (`/`, `/about`), `screenFromPathname` reads one back.
 - `src/lib/data/projects.ts` — project cards, with the link policy already applied.
+- `src/lib/data/background.ts` — the About screen's experience, skills, languages and
+  certifications. Mirrors the LinkedIn profile, as does `scripts/build-resume.py` (the resume
+  PDF); change all three together.
 - `src/lib/blog/posts.ts` — the only reader of `content/blog/<slug>/{en,pt}.mdx`. `loadPosts`
   returns a locale's posts newest first and throws on malformed frontmatter, failing the build.
   It uses `node:fs`, so client code imports post URLs and date formatting from
