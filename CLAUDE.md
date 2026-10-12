@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-# andersonbegossi.dev
+# andersonbegossi-dev
 
 andersonbegossi.dev — Anderson Begossi's portfolio and technical blog. Next.js App Router,
 fully statically exported.
@@ -95,7 +95,7 @@ the `next/navigation` mock installed in `vitest.setup.ts`. Assert on what a visi
 
 ### Issue tracker
 
-Issues live in this repo's GitHub Issues (andersonbegossi/andersonbegossi.dev), via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+Issues live in this repo's GitHub Issues (andersonbegossi/andersonbegossi-dev), via the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 

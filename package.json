@@ -1,11 +1,11 @@
 {
-  "name": "andersonbegossi.dev",
+  "name": "andersonbegossi-dev",
   "version": "0.1.0",
   "private": true,
   "description": "andersonbegossi.dev — Anderson Begossi's portfolio and technical blog",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andersonbegossi/andersonbegossi.dev.git"
+    "url": "git+https://github.com/andersonbegossi/andersonbegossi-dev.git"
   },
   "license": "UNLICENSED",
   "type": "module",

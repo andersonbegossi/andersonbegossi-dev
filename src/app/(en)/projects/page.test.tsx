@@ -38,7 +38,7 @@ describe('Projects screen', () => {
     expect(githubLinks).toHaveLength(1);
     expect(githubLinks[0]).toHaveAttribute(
       'href',
-      'https://github.com/andersonbegossi/andersonbegossi.dev',
+      'https://github.com/andersonbegossi/andersonbegossi-dev',
     );
     expect(
       within(screen.getByRole('article', { name: 'andersonbegossi.dev' })).getByRole('link', {

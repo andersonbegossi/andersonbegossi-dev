@@ -9,7 +9,7 @@ export const siteConfig = {
   email: 'andersonbegossi@gmail.com',
   github: 'https://github.com/andersonbegossi',
   /** This site's own repository — public, so the andersonbegossi.dev project card links to it. */
-  repo: 'https://github.com/andersonbegossi/andersonbegossi.dev',
+  repo: 'https://github.com/andersonbegossi/andersonbegossi-dev',
   linkedin: 'https://linkedin.com/in/andersonbegossi-b5065a130',
   /** Not the design's bamse.com.br, which is NXDOMAIN — this is the live site. */
   employer: { name: 'Bamse', url: 'https://www.bamse.co/' },

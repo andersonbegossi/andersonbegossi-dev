@@ -40,7 +40,7 @@ repo is private/nonexistent. The design's other project cards (`stewart-acid-bas
 `voce-mais-saude`, `rn-monorepo-starter`, all 404 publicly today) are not shown at all;
 the only card, `andersonbegossi.dev` (the design's `begossi.dev`, renamed to the real
 domain), links to this repository
-(`github.com/andersonbegossi/andersonbegossi.dev`), which is public. The design's placeholder
+(`github.com/andersonbegossi/andersonbegossi-dev`), which is public. The design's placeholder
 `apps.apple.com` "Live" link is dropped.
 
 Two design controls needed correcting under this rule:
