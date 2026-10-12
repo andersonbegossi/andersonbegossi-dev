@@ -74,23 +74,9 @@ describe('Home screen', () => {
     );
   });
 
-  it('previews the three most recent posts, linked to their URLs', () => {
+  it('leaves out the writing section while no posts are published', () => {
     renderRoute(<HomePage />);
 
-    const writing = screen.getByRole('region', { name: 'Writing' });
-    const posts = within(writing).getAllByRole('listitem');
-
-    expect(posts).toHaveLength(3);
-    expect(within(posts[0]).getByRole('link')).toHaveAttribute('href', '/blog/sharing-code');
-    expect(posts[0]).toHaveTextContent('Sharing code between three production React Native apps');
-    expect(posts[0]).toHaveTextContent('Jun 12, 2026');
-    expect(within(posts[1]).getByRole('link')).toHaveAttribute('href', '/blog/biometric-auth');
-    expect(posts[1]).toHaveTextContent('Apr 28, 2026');
-    expect(within(posts[2]).getByRole('link')).toHaveAttribute('href', '/blog/pix-checkout');
-    expect(posts[2]).toHaveTextContent('Feb 9, 2026');
-    expect(within(writing).getByRole('link', { name: /View all/ })).toHaveAttribute(
-      'href',
-      '/blog',
-    );
+    expect(screen.queryByRole('region', { name: 'Writing' })).not.toBeInTheDocument();
   });
 });

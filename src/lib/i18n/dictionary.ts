@@ -43,6 +43,8 @@ export type Dictionary = {
     featured: string;
     minRead: string;
     noResults: string;
+    /** Shown while no post is published; the design always has posts, so this copy is ours. */
+    empty: string;
   };
   resume: { title: string; download: string; summary: string };
   contact: {

@@ -105,3 +105,11 @@
   line-height: 1.6;
   color: var(--muted);
 }
+
+/* The design's "no results" note (search, #8), reused for a blog with no posts yet. */
+.empty {
+  margin: 32px 0 0;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--muted);
+}

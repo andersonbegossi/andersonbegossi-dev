@@ -15,30 +15,11 @@ describe('Portuguese Blog screen', () => {
     expect(within(nav).getByRole('link', { name: 'Blog' })).toHaveAttribute('aria-current', 'page');
   });
 
-  it('leads with the Portuguese featured post', () => {
+  it('says posts are coming in Portuguese while none are published', () => {
     renderRoute(<BlogPage />, '/pt/blog');
 
-    const card = screen.getByRole('link', { name: /★ Destaque/ });
-    expect(card).toHaveAttribute('href', '/pt/blog/sharing-code');
-    expect(card).toHaveTextContent(
-      'Compartilhando código entre três apps React Native em produção',
-    );
-    expect(card).toHaveTextContent('12 jun 2026 · 8 min de leitura');
-  });
-
-  it('lists the remaining Portuguese posts with their metadata', () => {
-    renderRoute(<BlogPage />, '/pt/blog');
-
-    const rows = within(screen.getByRole('list', { name: 'Blog' })).getAllByRole('link');
-
-    expect(rows.map((row) => row.getAttribute('href'))).toEqual([
-      '/pt/blog/biometric-auth',
-      '/pt/blog/pix-checkout',
-      '/pt/blog/rn-accessibility',
-    ]);
-    expect(rows[1]).toHaveTextContent('Pagamentos');
-    expect(rows[1]).toHaveTextContent('Adicionando Pix a um checkout mobile');
-    expect(rows[1]).toHaveTextContent(/Integrando o pagamento instantâneo brasileiro/);
-    expect(rows[1]).toHaveTextContent('9 fev 2026 · 7 min de leitura');
+    expect(
+      screen.getByText('Nenhum artigo ainda — o primeiro está a caminho.'),
+    ).toBeInTheDocument();
   });
 });

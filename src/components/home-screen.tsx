@@ -91,26 +91,28 @@ export function HomeScreen({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section aria-labelledby="recent-writing" className={styles.writing}>
-        <div className={styles.sectionHead}>
-          <h2 id="recent-writing" className={styles.sectionTitle}>
-            {t.home.recentWriting}
-          </h2>
-          <Link href={localePath('/blog', locale)} className={styles.viewAll}>
-            {t.home.viewAll} →
-          </Link>
-        </div>
-        <ul className={styles.posts}>
-          {recentPosts.map((post) => (
-            <li key={post.slug}>
-              <Link href={postPath(post.slug, locale)} className={styles.post}>
-                <span className={styles.postTitle}>{post.title}</span>
-                <span className={styles.postDate}>{formatPostDate(post.date, locale)}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {recentPosts.length > 0 ? (
+        <section aria-labelledby="recent-writing" className={styles.writing}>
+          <div className={styles.sectionHead}>
+            <h2 id="recent-writing" className={styles.sectionTitle}>
+              {t.home.recentWriting}
+            </h2>
+            <Link href={localePath('/blog', locale)} className={styles.viewAll}>
+              {t.home.viewAll} →
+            </Link>
+          </div>
+          <ul className={styles.posts}>
+            {recentPosts.map((post) => (
+              <li key={post.slug}>
+                <Link href={postPath(post.slug, locale)} className={styles.post}>
+                  <span className={styles.postTitle}>{post.title}</span>
+                  <span className={styles.postDate}>{formatPostDate(post.date, locale)}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
     </div>
   );
 }

@@ -20,41 +20,11 @@ describe('Blog screen', () => {
     expect(within(nav).getByRole('link', { name: 'Blog' })).toHaveAttribute('aria-current', 'page');
   });
 
-  it('leads with the featured post as a large card', () => {
+  it('says posts are coming while none are published', () => {
     renderRoute(<BlogPage />, '/blog');
 
-    const card = screen.getByRole('link', { name: /★ Featured/ });
-    expect(card).toHaveAttribute('href', '/blog/sharing-code');
-    expect(card).toHaveTextContent('Sharing code between three production React Native apps');
-    expect(card).toHaveTextContent(
-      'How we cut development time by ~30% with a monorepo, private NPM packages and a shared design system.',
-    );
-    expect(card).toHaveTextContent('Jun 12, 2026 · 8 min read');
-  });
-
-  it('lists the remaining posts newest first with their metadata', () => {
-    renderRoute(<BlogPage />, '/blog');
-
-    const list = screen.getByRole('list', { name: 'Blog' });
-    const rows = within(list).getAllByRole('link');
-
-    expect(rows.map((row) => row.getAttribute('href'))).toEqual([
-      '/blog/biometric-auth',
-      '/blog/pix-checkout',
-      '/blog/rn-accessibility',
-    ]);
-    expect(rows[0]).toHaveTextContent('Security');
-    expect(rows[0]).toHaveTextContent('Biometric authentication in React Native, done right');
-    expect(rows[0]).toHaveTextContent(/Face ID and fingerprint login are easy to demo/);
-    expect(rows[0]).toHaveTextContent('Apr 28, 2026 · 6 min read');
-    expect(rows[2]).toHaveTextContent('Accessibility');
-    expect(rows[2]).toHaveTextContent('Dec 3, 2025 · 5 min read');
-  });
-
-  it('does not repeat the featured post in the list', () => {
-    renderRoute(<BlogPage />, '/blog');
-
-    const list = screen.getByRole('list', { name: 'Blog' });
-    expect(within(list).queryByText(/Sharing code/)).not.toBeInTheDocument();
+    expect(screen.getByText('No posts yet — the first one is on its way.')).toBeInTheDocument();
+    expect(screen.queryByText(/★ Featured/)).not.toBeInTheDocument();
+    expect(screen.queryByRole('list', { name: 'Blog' })).not.toBeInTheDocument();
   });
 });

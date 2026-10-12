@@ -30,18 +30,22 @@ export function BlogScreen({ locale }: { locale: Locale }) {
         </Link>
       ) : null}
 
-      <ul aria-labelledby="blog-title" className={styles.list}>
-        {rest.map((post) => (
-          <li key={post.slug}>
-            <Link href={postPath(post.slug, locale)} className={styles.row}>
-              <span className={styles.category}>{post.category}</span>
-              <span className={styles.rowTitle}>{post.title}</span>
-              <span className={styles.rowExcerpt}>{post.excerpt}</span>
-              <span className={styles.meta}>{meta(post)}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {posts.length === 0 ? <p className={styles.empty}>{t.blog.empty}</p> : null}
+
+      {rest.length > 0 ? (
+        <ul aria-labelledby="blog-title" className={styles.list}>
+          {rest.map((post) => (
+            <li key={post.slug}>
+              <Link href={postPath(post.slug, locale)} className={styles.row}>
+                <span className={styles.category}>{post.category}</span>
+                <span className={styles.rowTitle}>{post.title}</span>
+                <span className={styles.rowExcerpt}>{post.excerpt}</span>
+                <span className={styles.meta}>{meta(post)}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </div>
   );
 }

@@ -32,6 +32,8 @@ const defaultContentDir = join(process.cwd(), 'content', 'blog');
  * than shipping a half-rendered post.
  */
 export function loadPosts(locale: Locale, contentDir = defaultContentDir): Post[] {
+  // Git keeps no empty directories: with every post removed, `content/blog/` is gone.
+  if (!existsSync(contentDir)) return [];
   return readdirSync(contentDir, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .flatMap(({ name: slug }) => {

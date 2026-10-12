@@ -12,7 +12,9 @@ edit, and long-form writing in string literals is hostile.
 
 Posts are MDX files: `content/blog/<slug>/en.mdx` and `content/blog/<slug>/pt.mdx`,
 with frontmatter `title`, `excerpt`, `date`, `category`, `tags`, `minutes`,
-`featured`. The four designed posts are converted to MDX as seed content. A post is
+`featured`. ~~The four designed posts are converted to MDX as seed content.~~ (Amended
+2026-10-12: the site launches with no posts — the designed posts are not published — and
+the Blog screen shows an empty-state note until the first post lands.) A post is
 published in a locale by the existence of its file.
 
 ## Consequences

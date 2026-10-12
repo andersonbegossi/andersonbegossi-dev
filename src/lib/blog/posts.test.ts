@@ -45,6 +45,11 @@ function contentDir(files: Record<string, { frontmatter: Frontmatter; body?: str
 }
 
 describe('loadPosts', () => {
+  it('has no posts when the content directory does not exist', () => {
+    // Git keeps no empty directories, so a blog with every post removed has no `content/blog/`.
+    expect(loadPosts('en', join(tmpdir(), 'posts-missing-dir'))).toEqual([]);
+  });
+
   it('turns a post file into a typed post', () => {
     const dir = contentDir({
       'sharing-code/en.mdx': {
@@ -141,28 +146,5 @@ describe('featuredPost', () => {
     const dir = contentDir({ 'plain/en.mdx': { frontmatter: complete } });
 
     expect(featuredPost(loadPosts('en', dir))).toBeUndefined();
-  });
-});
-
-describe('the seed posts in content/blog', () => {
-  it.each(['en', 'pt'] as const)('publishes all four designed posts in %s', (locale) => {
-    const posts = loadPosts(locale);
-
-    expect(posts.map((post) => post.slug)).toEqual([
-      'sharing-code',
-      'biometric-auth',
-      'pix-checkout',
-      'rn-accessibility',
-    ]);
-    for (const post of posts) expect(post.locales).toEqual(['en', 'pt']);
-    expect(featuredPost(posts)?.slug).toBe('sharing-code');
-  });
-
-  it('carries the featured post’s code block in both locales', () => {
-    for (const locale of ['en', 'pt'] as const) {
-      const body = loadPosts(locale)[0].body;
-      expect(body).toContain('```text\napps/\n  dental-cremer/');
-      expect(body).toContain('packages/\n  ui/          # design system (Styled Components)');
-    }
   });
 });
