@@ -49,6 +49,8 @@ export type Dictionary = {
     title: string;
     subtitle: string;
     searchPlaceholder: string;
+    /** The search field's accessible name; the design hardcodes it in English only. */
+    searchLabel: string;
     featured: string;
     minRead: string;
     noResults: string;

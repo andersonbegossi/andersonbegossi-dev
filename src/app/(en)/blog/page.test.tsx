@@ -26,5 +26,6 @@ describe('Blog screen', () => {
     expect(screen.getByText('No posts yet — the first one is on its way.')).toBeInTheDocument();
     expect(screen.queryByText(/★ Featured/)).not.toBeInTheDocument();
     expect(screen.queryByRole('list', { name: 'Blog' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('searchbox')).not.toBeInTheDocument();
   });
 });

@@ -23,6 +23,9 @@ export type Post = {
   body: string;
 };
 
+/** A post without its body: what an index of posts shows, and all a client component needs. */
+export type PostSummary = Omit<Post, 'body'>;
+
 const defaultContentDir = join(process.cwd(), 'content', 'blog');
 
 /**
@@ -84,6 +87,6 @@ function calendarDate(value: unknown): string | undefined {
 }
 
 /** The post that leads the Blog screen: the newest one marked `featured` (user story 22). */
-export function featuredPost(posts: readonly Post[]): Post | undefined {
+export function featuredPost<P extends Pick<Post, 'featured'>>(posts: readonly P[]): P | undefined {
   return posts.find((post) => post.featured);
 }

@@ -50,6 +50,7 @@ export const pt: Dictionary = {
     title: 'Blog',
     subtitle: 'Notas sobre React Native, arquitetura e engenharia mobile.',
     searchPlaceholder: 'Buscar artigos…',
+    searchLabel: 'Buscar artigos',
     featured: 'Destaque',
     minRead: 'min de leitura',
     noResults: 'Nenhum artigo encontrado — tente outra busca.',
