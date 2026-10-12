@@ -1,16 +1,20 @@
-import Link from 'next/link';
-import { formatPostMeta, postPath } from '@/lib/blog/format';
 import { featuredPost, loadPosts } from '@/lib/blog/posts';
 import { getDictionary } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n/locale';
+import { BlogIndex } from './blog-index';
 import styles from './blog-screen.module.css';
 
-/** The Blog screen body: the featured post as a large card, then every other post as a row. */
+/**
+ * The Blog screen body. Posts are read here, at build time; searching and
+ * filtering them happens in the browser (`BlogIndex`), since the site is a
+ * static export (ADR 0001). The bodies stay behind so the page ships only what
+ * the index shows.
+ */
 export function BlogScreen({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
   const posts = loadPosts(locale);
-  const featured = featuredPost(posts);
-  const rest = posts.filter((post) => post !== featured);
+  const summaries = posts.map(({ body: _body, ...summary }) => summary);
+  const featured = featuredPost(summaries);
 
   return (
     <div className={styles.screen}>
@@ -19,31 +23,11 @@ export function BlogScreen({ locale }: { locale: Locale }) {
       </h1>
       <p className={styles.subtitle}>{t.blog.subtitle}</p>
 
-      {featured ? (
-        <Link href={postPath(featured.slug, locale)} className={styles.featured}>
-          <span className={styles.featuredLabel}>★ {t.blog.featured}</span>
-          <span className={styles.featuredTitle}>{featured.title}</span>
-          <span className={styles.featuredExcerpt}>{featured.excerpt}</span>
-          <span className={styles.meta}>{formatPostMeta(featured, locale)}</span>
-        </Link>
-      ) : null}
-
-      {posts.length === 0 ? <p className={styles.empty}>{t.blog.empty}</p> : null}
-
-      {rest.length > 0 ? (
-        <ul aria-labelledby="blog-title" className={styles.list}>
-          {rest.map((post) => (
-            <li key={post.slug}>
-              <Link href={postPath(post.slug, locale)} className={styles.row}>
-                <span className={styles.category}>{post.category}</span>
-                <span className={styles.rowTitle}>{post.title}</span>
-                <span className={styles.rowExcerpt}>{post.excerpt}</span>
-                <span className={styles.meta}>{formatPostMeta(post, locale)}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      ) : null}
+      {posts.length === 0 ? (
+        <p className={styles.empty}>{t.blog.empty}</p>
+      ) : (
+        <BlogIndex locale={locale} posts={summaries} featured={featured} labelledBy="blog-title" />
+      )}
     </div>
   );
 }

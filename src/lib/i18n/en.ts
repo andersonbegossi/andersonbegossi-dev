@@ -51,6 +51,7 @@ export const en: Dictionary = {
     title: 'Blog',
     subtitle: 'Notes on React Native, architecture and mobile engineering.',
     searchPlaceholder: 'Search articles…',
+    searchLabel: 'Search articles',
     featured: 'Featured',
     minRead: 'min read',
     noResults: 'No articles found — try another search.',

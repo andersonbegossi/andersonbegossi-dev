@@ -17,6 +17,44 @@
   text-wrap: pretty;
 }
 
+.search {
+  margin-top: 28px;
+  width: 100%;
+  padding: 11px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--card);
+  color: var(--fg);
+  outline-offset: 0;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.pill {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pill[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+}
+
 .featured {
   width: 100%;
   margin-top: 32px;
@@ -106,7 +144,7 @@
   color: var(--muted);
 }
 
-/* The design's "no results" note (search, #8), reused for a blog with no posts yet. */
+/* The design's "no results" note, reused for a blog with no posts yet. */
 .empty {
   margin: 32px 0 0;
   font-family: var(--font-mono);

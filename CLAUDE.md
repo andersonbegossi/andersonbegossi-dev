@@ -100,6 +100,8 @@ the `next/navigation` mock installed in `vitest.setup.ts`. Assert on what a visi
 (roles, visible text, real hrefs); do not reach for component internals.
 The site ships with no posts, so tests that need posts point the loader at
 `src/test/fixtures/blog/` with `vi.mock('@/lib/blog/posts', () => import('@/test/fixture-posts'))`.
+The Blog index's filter tests use a larger set (`fixture-index-posts`, `src/test/fixtures/blog-index/`)
+so the Article tests keep the exact posts they assert on.
 
 ## Agent skills
 
