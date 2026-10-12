@@ -1,0 +1,131 @@
+.screen {
+  animation: fadeUp 0.5s ease both;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+.download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.download:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.summary {
+  margin: 20px 0 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--fg);
+  text-wrap: pretty;
+}
+
+.sectionTitle {
+  margin: 0 0 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.experience {
+  margin-top: 44px;
+}
+
+.experienceTitle {
+  margin-bottom: 20px;
+}
+
+.jobs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.job {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 20px;
+}
+
+.role {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.company {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.period {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--faint);
+}
+
+.columns {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 36px;
+}
+
+.degree {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.school {
+  margin: 3px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.language {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.languageName {
+  font-weight: 500;
+}
+
+.muted {
+  color: var(--muted);
+}

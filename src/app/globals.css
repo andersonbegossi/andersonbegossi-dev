@@ -17,6 +17,8 @@
   --card: #ffffff;
   --code: #f4f2ee;
   --accent: var(--accent-base);
+  /* Text on an accent fill; white in both themes, as the design hardcodes it. */
+  --on-accent: #fff;
 
   --content-width: 736px;
   --gutter: 24px;

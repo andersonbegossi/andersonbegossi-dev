@@ -93,7 +93,7 @@
 
 .primaryAction:hover {
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
 }
 
 .secondaryAction {

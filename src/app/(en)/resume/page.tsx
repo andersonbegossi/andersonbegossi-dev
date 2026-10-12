@@ -1,12 +1,8 @@
-import { ScreenStub } from '@/components/screen-stub';
-import { getDictionary } from '@/lib/i18n';
+import { ResumeScreen } from '@/components/resume-screen';
 import { screenMetadata } from '@/lib/metadata';
-
-const t = getDictionary('en');
 
 export const metadata = screenMetadata('en', '/resume');
 
-/* Stub until the About & Resume ticket. */
 export default function ResumePage() {
-  return <ScreenStub title={t.resume.title} subtitle={t.resume.summary} />;
+  return <ResumeScreen locale="en" />;
 }

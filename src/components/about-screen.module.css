@@ -1,0 +1,183 @@
+.screen {
+  animation: fadeUp 0.5s ease both;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+.lead {
+  margin: 20px 0 0;
+  font-size: 15.5px;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+.secondary {
+  margin: 14px 0 0;
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.section {
+  margin-top: 56px;
+}
+
+.sectionTitle {
+  margin: 0 0 24px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.skillsTitle {
+  margin-bottom: 20px;
+}
+
+.columnTitle {
+  margin-bottom: 16px;
+}
+
+/* The label column shared by experience entries and skill groups. */
+.row {
+  display: grid;
+  grid-template-columns: minmax(120px, 150px) 1fr;
+  gap: 8px 24px;
+}
+
+.jobs {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.period {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--faint);
+  padding-top: 3px;
+}
+
+.role {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.company {
+  margin: 3px 0 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.bullets {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.bullet {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--fg);
+}
+
+.skillGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.skillGroup {
+  align-items: start;
+}
+
+.skillLabel {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  padding-top: 4px;
+}
+
+.chips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 9px;
+  background: var(--card);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+}
+
+.language {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.languageName {
+  font-weight: 500;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.degree {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.school {
+  margin: 3px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.certifications {
+  margin-top: 16px;
+}
+
+.certification {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* The design's label column leaves too little room for bullets on a phone. */
+@media (max-width: 560px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .skillLabel {
+    padding-top: 0;
+  }
+}
