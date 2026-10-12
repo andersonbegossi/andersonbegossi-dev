@@ -13,15 +13,15 @@ describe('Projects screen', () => {
     expect(screen.getByText(/Personal projects and apps I’ve designed/)).toBeInTheDocument();
   });
 
-  it('shows only the begossi.dev card with description and tech chips', () => {
+  it('shows only the andersonbegossi.dev card with description and tech chips', () => {
     renderRoute(<ProjectsPage />, PROJECTS);
 
     const cards = screen.getAllByRole('article');
     expect(
       cards.map((card) => within(card).getByRole('heading', { level: 2 }).textContent),
-    ).toEqual(['begossi.dev']);
+    ).toEqual(['andersonbegossi.dev']);
 
-    const site = screen.getByRole('article', { name: 'begossi.dev' });
+    const site = screen.getByRole('article', { name: 'andersonbegossi.dev' });
     expect(within(site).getByText(/This website — a bilingual, themeable/)).toBeInTheDocument();
     expect(
       within(within(site).getByRole('list', { name: /tech/i }))
@@ -30,15 +30,18 @@ describe('Projects screen', () => {
     ).toEqual(['Next.js', 'MDX', 'i18n']);
   });
 
-  it('links begossi.dev to this repository and shows no Live buttons', () => {
+  it('links andersonbegossi.dev to this repository and shows no Live buttons', () => {
     renderRoute(<ProjectsPage />, PROJECTS);
 
     const main = screen.getByRole('main');
     const githubLinks = within(main).getAllByRole('link', { name: /GitHub/ });
     expect(githubLinks).toHaveLength(1);
-    expect(githubLinks[0]).toHaveAttribute('href', 'https://github.com/andersonbegossi/abegossi');
+    expect(githubLinks[0]).toHaveAttribute(
+      'href',
+      'https://github.com/andersonbegossi/andersonbegossi.dev',
+    );
     expect(
-      within(screen.getByRole('article', { name: 'begossi.dev' })).getByRole('link', {
+      within(screen.getByRole('article', { name: 'andersonbegossi.dev' })).getByRole('link', {
         name: /GitHub/,
       }),
     ).toBe(githubLinks[0]);

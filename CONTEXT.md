@@ -1,4 +1,4 @@
-# Context — begossi.dev portfolio
+# Context — andersonbegossi.dev portfolio
 
 Anderson Begossi's public portfolio and technical blog. Implements, faithfully, the
 "Anderson Begossi — Portfolio" design imported from claude.ai/design (source snapshot:
@@ -28,8 +28,8 @@ and clients: SEO and shareable URLs are requirements, not nice-to-haves.
 
 - GitHub account for all public links: **`andersonbegossi`** (not `ambegossi`).
 - LinkedIn: `linkedin.com/in/andersonbegossi-b5065a130` · Email: `andersonbegossi@gmail.com`.
-- Custom domain: to be purchased (begossi.dev has no DNS today). Until then the site
-  lives on its Vercel URL; the canonical base URL is a single site-config constant.
+- Domain: **`andersonbegossi.dev`** (not the design's `begossi.dev`), served from Vercel.
+  The canonical base URL is a single site-config constant.
 - Assets pulled from the design project are served from `public/`:
   `hero-photo.webp`, `Anderson-Begossi-Resume.pdf`.
 
@@ -38,8 +38,9 @@ and clients: SEO and shareable URLs are requirements, not nice-to-haves.
 A visible link must resolve. Project GitHub/Live buttons are omitted while the target
 repo is private/nonexistent. The design's other project cards (`stewart-acid-base`,
 `voce-mais-saude`, `rn-monorepo-starter`, all 404 publicly today) are not shown at all;
-the only card, `begossi.dev`, links to this repository
-(`github.com/andersonbegossi/abegossi`), which is public. The design's placeholder
+the only card, `andersonbegossi.dev` (the design's `begossi.dev`, renamed to the real
+domain), links to this repository
+(`github.com/andersonbegossi/andersonbegossi.dev`), which is public. The design's placeholder
 `apps.apple.com` "Live" link is dropped.
 
 Two design controls needed correcting under this rule:

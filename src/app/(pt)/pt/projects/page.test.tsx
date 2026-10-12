@@ -6,13 +6,13 @@ import ProjectsPage from './page';
 const PT_PROJECTS = '/pt/projects';
 
 describe('Portuguese Projects screen', () => {
-  it('shows the screen and the begossi.dev card in Portuguese', () => {
+  it('shows the screen and the andersonbegossi.dev card in Portuguese', () => {
     renderRoute(<ProjectsPage />, PT_PROJECTS);
 
     expect(screen.getByRole('heading', { level: 1, name: 'Projetos' })).toBeInTheDocument();
     expect(screen.getAllByRole('article')).toHaveLength(1);
     expect(
-      within(screen.getByRole('article', { name: 'begossi.dev' })).getByText(
+      within(screen.getByRole('article', { name: 'andersonbegossi.dev' })).getByText(
         /Este site — portfólio e blog técnico bilíngue/,
       ),
     ).toBeInTheDocument();
@@ -25,9 +25,12 @@ describe('Portuguese Projects screen', () => {
     const main = screen.getByRole('main');
     const githubLinks = within(main).getAllByRole('link', { name: /GitHub/ });
     expect(githubLinks).toHaveLength(1);
-    expect(githubLinks[0]).toHaveAttribute('href', 'https://github.com/andersonbegossi/abegossi');
+    expect(githubLinks[0]).toHaveAttribute(
+      'href',
+      'https://github.com/andersonbegossi/andersonbegossi.dev',
+    );
     expect(
-      within(screen.getByRole('article', { name: 'begossi.dev' })).getByRole('link', {
+      within(screen.getByRole('article', { name: 'andersonbegossi.dev' })).getByRole('link', {
         name: /GitHub/,
       }),
     ).toBe(githubLinks[0]);

@@ -51,11 +51,11 @@ describe('Home screen', () => {
     );
   });
 
-  it('previews the featured begossi.dev project, leading to the projects screen', () => {
+  it('previews the featured andersonbegossi.dev project, leading to the projects screen', () => {
     renderRoute(<HomePage />);
 
     const selectedWork = screen.getByRole('region', { name: 'Selected work' });
-    const card = within(selectedWork).getByRole('link', { name: /begossi\.dev/ });
+    const card = within(selectedWork).getByRole('link', { name: /andersonbegossi\.dev/ });
 
     expect(card).toHaveAttribute('href', '/projects');
     expect(within(selectedWork).getByText(/Next\.js · MDX · i18n/)).toBeInTheDocument();

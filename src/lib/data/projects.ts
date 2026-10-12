@@ -17,14 +17,15 @@ export type Project = {
 
 /**
  * Copied from the design snapshot's `projectItems` in both locales, keeping
- * only begossi.dev: the design's other cards (`stewart-acid-base`,
- * `voce-mais-saude`, `rn-monorepo-starter`) are not shown. begossi.dev links to
- * this repository, and gets no Live link until the domain is purchased.
+ * only the site's own card, renamed from the design's `begossi.dev` to the real
+ * domain: the design's other cards (`stewart-acid-base`, `voce-mais-saude`,
+ * `rn-monorepo-starter`) are not shown. andersonbegossi.dev links to this
+ * repository, and gets no Live link until the domain resolves.
  */
 export const projects: readonly Project[] = [
   {
-    slug: 'begossi-dev',
-    name: 'begossi.dev',
+    slug: 'andersonbegossi-dev',
+    name: 'andersonbegossi.dev',
     desc: {
       en: 'This website — a bilingual, themeable portfolio and technical blog focused on typography and performance.',
       pt: 'Este site — portfólio e blog técnico bilíngue, com temas e foco em tipografia e performance.',
