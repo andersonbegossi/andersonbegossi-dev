@@ -1,0 +1,46 @@
+.heading {
+  margin: 28px 0 6px;
+  font-size: 19px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.paragraph {
+  margin: 10px 0;
+  font-size: 15.5px;
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+
+.codeBlock {
+  margin: 14px 0;
+  padding: 18px 20px;
+  background: var(--code);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--fg);
+  white-space: pre;
+}
+
+/* The design has no inline code; this keeps it in the code block's voice. */
+.code {
+  padding: 1px 5px;
+  background: var(--code);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+/* Inside a code block the `pre` already draws the box and sets the type. */
+.codeBlock .code {
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  font-size: inherit;
+}

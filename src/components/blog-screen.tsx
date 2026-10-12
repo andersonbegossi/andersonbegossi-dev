@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { formatPostDate, postPath } from '@/lib/blog/format';
-import { featuredPost, loadPosts, type Post } from '@/lib/blog/posts';
+import { formatPostMeta, postPath } from '@/lib/blog/format';
+import { featuredPost, loadPosts } from '@/lib/blog/posts';
 import { getDictionary } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n/locale';
 import styles from './blog-screen.module.css';
@@ -11,8 +11,6 @@ export function BlogScreen({ locale }: { locale: Locale }) {
   const posts = loadPosts(locale);
   const featured = featuredPost(posts);
   const rest = posts.filter((post) => post !== featured);
-  const meta = (post: Post) =>
-    `${formatPostDate(post.date, locale)} · ${post.minutes} ${t.blog.minRead}`;
 
   return (
     <div className={styles.screen}>
@@ -26,7 +24,7 @@ export function BlogScreen({ locale }: { locale: Locale }) {
           <span className={styles.featuredLabel}>★ {t.blog.featured}</span>
           <span className={styles.featuredTitle}>{featured.title}</span>
           <span className={styles.featuredExcerpt}>{featured.excerpt}</span>
-          <span className={styles.meta}>{meta(featured)}</span>
+          <span className={styles.meta}>{formatPostMeta(featured, locale)}</span>
         </Link>
       ) : null}
 
@@ -40,7 +38,7 @@ export function BlogScreen({ locale }: { locale: Locale }) {
                 <span className={styles.category}>{post.category}</span>
                 <span className={styles.rowTitle}>{post.title}</span>
                 <span className={styles.rowExcerpt}>{post.excerpt}</span>
-                <span className={styles.meta}>{meta(post)}</span>
+                <span className={styles.meta}>{formatPostMeta(post, locale)}</span>
               </Link>
             </li>
           ))}

@@ -1,4 +1,16 @@
+import { getDictionary } from '@/lib/i18n';
 import { htmlLang, type Locale, localePath } from '@/lib/i18n/locale';
+import type { Post } from './posts';
+
+/**
+ * The locale-independent screen path a post routes at, in the sense `localePath`
+ * and `screenFromPathname` use the word — the posts' counterpart to `ScreenPath`.
+ */
+export type PostScreenPath = `/blog/${string}`;
+
+export function postScreen(slug: string): PostScreenPath {
+  return `/blog/${slug}`;
+}
 
 /**
  * A post's canonical URL, without the trailing slash like every other `next/link`
@@ -6,7 +18,12 @@ import { htmlLang, type Locale, localePath } from '@/lib/i18n/locale';
  * components can link to posts without pulling in `node:fs`.
  */
 export function postPath(slug: string, locale: Locale): string {
-  return localePath(`/blog/${slug}`, locale);
+  return localePath(postScreen(slug), locale);
+}
+
+/** The design's "Jun 12, 2026 · 8 min read" line, shared by the Blog and Article screens. */
+export function formatPostMeta(post: Pick<Post, 'date' | 'minutes'>, locale: Locale): string {
+  return `${formatPostDate(post.date, locale)} · ${post.minutes} ${getDictionary(locale).blog.minRead}`;
 }
 
 /**

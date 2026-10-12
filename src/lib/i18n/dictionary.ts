@@ -17,6 +17,8 @@ export type Dictionary = {
     toggleTheme: string;
     /** Names a project card's list of tech chips. */
     techStack: string;
+    /** Names the list of tag chips that closes an article. */
+    tags: string;
   };
   /** The design has no 404 screen; this copy is ours, kept to the design's voice. */
   notFound: { title: string; subtitle: string };
