@@ -65,6 +65,10 @@ Formspree for contact, ADR 0004).
   returns a locale's posts newest first and throws on malformed frontmatter, failing the build.
   It uses `node:fs`, so client code imports post URLs and date formatting from
   `src/lib/blog/format.ts` instead.
+  `src/components/article-screen.tsx` compiles a post's body with `@mdx-js/mdx`'s
+  `evaluateSync` through `mdx-components.tsx` at build time. A locale with no posts generates
+  one `_` placeholder slug (a `noindex` 404), because `output: 'export'` rejects an empty
+  `generateStaticParams`.
 - `src/app/globals.css` — the light/dark token set (`--bg`, `--fg`, `--muted`, `--faint`,
   `--border`, `--card`, `--code`, `--accent`). Component styles are CSS Modules that consume
   these tokens; no component library (ADR 0008).
@@ -94,6 +98,8 @@ Vitest + jsdom + Testing Library. Tests render through the `renderRoute` seam
 (`src/test/render-route.tsx`), which wraps the page in `SiteShell` and sets the pathname for
 the `next/navigation` mock installed in `vitest.setup.ts`. Assert on what a visitor sees
 (roles, visible text, real hrefs); do not reach for component internals.
+The site ships with no posts, so tests that need posts point the loader at
+`src/test/fixtures/blog/` with `vi.mock('@/lib/blog/posts', () => import('@/test/fixture-posts'))`.
 
 ## Agent skills
 
