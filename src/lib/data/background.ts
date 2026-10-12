@@ -20,7 +20,7 @@ export type Background = {
 };
 
 /**
- * Anderson's career, shared by the About and Resume screens. Copied verbatim
+ * Anderson's career, as the About screen lists it. Copied verbatim
  * from the design snapshot's `experience`, `skills`, `languages` and
  * `certifications` in both locales; typed per locale so a missing translation
  * is a compile error, as with the dictionaries.
@@ -160,12 +160,8 @@ export const background: Record<Locale, Background> = {
   },
 };
 
-/**
- * The design hardcodes the school line in both locales: About spells the name
- * out, the compact Resume abbreviates it.
- */
+/** The design hardcodes the school line in both locales. */
 export const education = {
   school: 'UCS — Universidade de Caxias do Sul',
-  schoolShort: 'UCS',
   years: '2015–2021',
 } as const;

@@ -6,7 +6,7 @@ import type { Dictionary } from './dictionary';
  * only holds nav, buttons and section titles.
  */
 export const en: Dictionary = {
-  nav: { about: 'About', projects: 'Projects', blog: 'Blog', resume: 'Resume' },
+  nav: { about: 'About', projects: 'Projects', blog: 'Blog' },
   a11y: {
     mainNav: 'Main',
     home: 'Home',
@@ -38,6 +38,7 @@ export const en: Dictionary = {
     languagesTitle: 'Languages',
     educationTitle: 'Education',
     degree: 'BSc in Computer Science',
+    downloadResume: 'Download resume',
   },
   projects: {
     title: 'Projects',
@@ -53,12 +54,6 @@ export const en: Dictionary = {
     minRead: 'min read',
     noResults: 'No articles found — try another search.',
     empty: 'No posts yet — the first one is on its way.',
-  },
-  resume: {
-    title: 'Resume',
-    download: 'Download PDF',
-    summary:
-      'Software engineer with 6+ years of experience, specialized in mobile and frontend development with React Native, React, Expo and Node.js. Currently building and maintaining mobile apps for major healthcare brands (Henry Schein — NASDAQ:HSIC), used by thousands of users with a 4.9/5 average store rating.',
   },
   contact: {
     title: 'Contact',

@@ -2,11 +2,37 @@
   animation: fadeUp 0.5s ease both;
 }
 
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .title {
   margin: 0;
   font-size: 28px;
   font-weight: 650;
   letter-spacing: -0.03em;
+}
+
+.download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.download:hover {
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 .lead {

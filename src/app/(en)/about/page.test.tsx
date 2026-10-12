@@ -12,6 +12,14 @@ describe('About screen', () => {
     expect(screen.getByText(/I care deeply about performance/)).toBeInTheDocument();
   });
 
+  it('offers the committed resume PDF as a download', () => {
+    renderRoute(<AboutPage />, '/about');
+
+    const download = screen.getByRole('link', { name: /Download resume/ });
+    expect(download).toHaveAttribute('href', '/Anderson-Begossi-Resume.pdf');
+    expect(download).toHaveAttribute('download', 'Anderson-Begossi-Resume.pdf');
+  });
+
   it('lists the four jobs with their period, company and every bullet', () => {
     renderRoute(<AboutPage />, '/about');
 

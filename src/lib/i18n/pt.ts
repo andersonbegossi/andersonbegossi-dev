@@ -6,7 +6,7 @@ import type { Dictionary } from './dictionary';
  * `/pt/` prefix (ADR 0002).
  */
 export const pt: Dictionary = {
-  nav: { about: 'Sobre', projects: 'Projetos', blog: 'Blog', resume: 'Currículo' },
+  nav: { about: 'Sobre', projects: 'Projetos', blog: 'Blog' },
   a11y: {
     mainNav: 'Principal',
     home: 'Início',
@@ -38,6 +38,7 @@ export const pt: Dictionary = {
     languagesTitle: 'Idiomas',
     educationTitle: 'Formação',
     degree: 'Bacharelado em Ciência da Computação',
+    downloadResume: 'Baixar currículo',
   },
   projects: {
     title: 'Projetos',
@@ -53,12 +54,6 @@ export const pt: Dictionary = {
     minRead: 'min de leitura',
     noResults: 'Nenhum artigo encontrado — tente outra busca.',
     empty: 'Nenhum artigo ainda — o primeiro está a caminho.',
-  },
-  resume: {
-    title: 'Currículo',
-    download: 'Baixar PDF',
-    summary:
-      'Engenheiro de software com mais de 6 anos de experiência, especializado em desenvolvimento mobile e frontend com React Native, React, Expo e Node.js. Atualmente desenvolvo e mantenho aplicativos mobile para grandes marcas do setor de saúde (Henry Schein — NASDAQ:HSIC), usados por milhares de usuários com avaliação média de 4,9/5.',
   },
   contact: {
     title: 'Contato',

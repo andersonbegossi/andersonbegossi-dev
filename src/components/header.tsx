@@ -18,7 +18,6 @@ const navItems = [
   ['/about', 'about'],
   ['/projects', 'projects'],
   ['/blog', 'blog'],
-  ['/resume', 'resume'],
 ] as const satisfies readonly (readonly [ScreenPath, keyof Dictionary['nav']])[];
 
 /**

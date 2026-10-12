@@ -42,7 +42,7 @@ describe('locale URLs', () => {
   });
 
   it('round-trips every screen through both locales', () => {
-    for (const screen of ['/', '/about', '/projects', '/blog', '/resume', '/contact']) {
+    for (const screen of ['/', '/about', '/projects', '/blog', '/contact']) {
       expect(screenFromPathname(localePath(screen, 'en'))).toBe(screen);
       expect(screenFromPathname(localePath(screen, 'pt'))).toBe(screen);
     }

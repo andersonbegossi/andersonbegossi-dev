@@ -7,8 +7,10 @@ and clients: SEO and shareable URLs are requirements, not nice-to-haves.
 
 ## Glossary
 
-- **Screen** — one of the seven designed views: Home, About, Projects, Blog, Article,
-  Resume, Contact. Each screen is a routed page (no in-memory-only screens).
+- **Screen** — one of the six views the site serves: Home, About, Projects, Blog, Article,
+  Contact. Each screen is a routed page (no in-memory-only screens). The design also has a
+  Resume screen; it duplicated About, so About absorbed its "download resume" button and
+  there is no `/resume` route.
 - **Locale** — `en` (default, served at the URL root) or `pt` (Brazilian Portuguese,
   served under the `/pt/` prefix). Every page exists in both locales with `hreflang`
   links between the pair.

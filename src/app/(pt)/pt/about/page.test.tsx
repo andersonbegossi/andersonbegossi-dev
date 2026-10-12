@@ -14,6 +14,15 @@ describe('Portuguese About screen', () => {
     expect(screen.getByText(/Tenho foco em performance/)).toBeInTheDocument();
   });
 
+  it('offers the resume PDF under a Portuguese label', () => {
+    renderRoute(<AboutPage />, PT_ABOUT);
+
+    expect(screen.getByRole('link', { name: /Baixar currículo/ })).toHaveAttribute(
+      'href',
+      '/Anderson-Begossi-Resume.pdf',
+    );
+  });
+
   it('lists the four jobs in Portuguese', () => {
     renderRoute(<AboutPage />, PT_ABOUT);
 

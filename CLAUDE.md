@@ -80,7 +80,7 @@ document. Theme is `data-theme` on `<html>`: `src/lib/theme.ts` exports both the
 helpers and `themeInitScript`, a blocking inline script in `<head>` that sets the attribute
 before first paint. The two must stay in sync — changing resolution logic means changing both.
 
-**Screens:** each of the seven designed screens is a routed page. Screens whose ticket hasn't
+**Screens:** each of the six screens (CONTEXT.md) is a routed page. Screens whose ticket hasn't
 landed render `ScreenStub` so every link the header exposes already resolves. Replace the stub
 wholesale when implementing that screen.
 

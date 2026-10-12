@@ -33,7 +33,6 @@ describe('site chrome', () => {
       '/projects',
     );
     expect(within(nav).getByRole('link', { name: 'Blog' })).toHaveAttribute('href', '/blog');
-    expect(within(nav).getByRole('link', { name: 'Resume' })).toHaveAttribute('href', '/resume');
   });
 
   it('marks the current screen as the active nav item', () => {
@@ -82,10 +81,6 @@ describe('language', () => {
       '/pt/projects',
     );
     expect(within(nav).getByRole('link', { name: 'Blog' })).toHaveAttribute('href', '/pt/blog');
-    expect(within(nav).getByRole('link', { name: 'Currículo' })).toHaveAttribute(
-      'href',
-      '/pt/resume',
-    );
   });
 
   it('marks the current screen as active in either locale', () => {

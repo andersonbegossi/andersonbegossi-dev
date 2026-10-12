@@ -1,6 +1,7 @@
 import { background, education } from '@/lib/data/background';
 import { getDictionary } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n/locale';
+import { siteConfig } from '@/lib/site-config';
 import styles from './about-screen.module.css';
 
 /** The About screen body, rendered by the routed page of each locale. */
@@ -10,7 +11,16 @@ export function AboutScreen({ locale }: { locale: Locale }) {
 
   return (
     <div className={styles.screen}>
-      <h1 className={styles.title}>{t.about.title}</h1>
+      <div className={styles.head}>
+        <h1 className={styles.title}>{t.about.title}</h1>
+        <a
+          href={siteConfig.resumePdf}
+          download={siteConfig.resumeFileName}
+          className={styles.download}
+        >
+          {t.about.downloadResume} ↓
+        </a>
+      </div>
       <p className={styles.lead}>{t.about.p1}</p>
       <p className={styles.secondary}>{t.about.p2}</p>
 

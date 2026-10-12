@@ -4,7 +4,7 @@
  * page silently falling back to English is exactly what this must prevent.
  */
 export type Dictionary = {
-  nav: { about: string; projects: string; blog: string; resume: string };
+  nav: { about: string; projects: string; blog: string };
   /**
    * Accessible names for the controls whose visible label is a glyph or a code.
    * The design hardcodes these in English; a `lang="pt-BR"` document that
@@ -41,6 +41,8 @@ export type Dictionary = {
     languagesTitle: string;
     educationTitle: string;
     degree: string;
+    /** The design puts this on its own Resume screen, which About absorbed. */
+    downloadResume: string;
   };
   projects: { title: string; subtitle: string; demo: string };
   blog: {
@@ -53,7 +55,6 @@ export type Dictionary = {
     /** Shown while no post is published; the design always has posts, so this copy is ours. */
     empty: string;
   };
-  resume: { title: string; download: string; summary: string };
   contact: {
     title: string;
     subtitle: string;

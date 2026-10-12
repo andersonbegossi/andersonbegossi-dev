@@ -21,7 +21,7 @@ export const LOCALE_STORAGE_KEY = 'ab-lang';
  * at — `/about` is `/about` in English and `/pt/about` in Portuguese. Typing the
  * screen means a page cannot claim a canonical URL the site does not serve.
  */
-export const screens = ['/', '/about', '/projects', '/blog', '/resume', '/contact'] as const;
+export const screens = ['/', '/about', '/projects', '/blog', '/contact'] as const;
 
 export type ScreenPath = (typeof screens)[number];
 
