@@ -38,7 +38,7 @@ Formatter settings match the code already written by hand: single quotes in JS/T
 - CSS is linted, not merely formatted.
 - No type-aware lint rules. Biome does not read the type graph, so
   `no-floating-promises` and `no-misused-promises` are unavailable. Nothing in the
-  app is async today; if the contact form (ADR 0004) or the MDX pipeline
+  app is async today; if the contact form (ADR 0009) or the MDX pipeline
   (ADR 0003) introduce real async code, revisit by adding `typescript-eslint`
   type-checked rules as a CI-only step rather than replacing Biome.
 - `no-html-link-for-pages` is not enforced. Internal links are instead covered by

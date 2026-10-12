@@ -21,4 +21,4 @@ deployable as plain static output.
 - Per-page/per-article URLs, full pre-rendered HTML, best-possible SEO and TTFB.
 - The site doubles as a work sample of Anderson's professional stack.
 - No server features (API routes, middleware-based locale detection) may be relied on;
-  anything dynamic must work client-side or via third parties (see ADR 0004).
+  anything dynamic must work client-side or via third parties (see ADR 0009).

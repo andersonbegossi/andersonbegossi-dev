@@ -6,7 +6,7 @@ const t = getDictionary('en');
 
 export const metadata = screenMetadata('en', '/contact');
 
-/* Stub until the Contact ticket wires the Formspree form. */
+/* Stub until the Contact ticket wires the Web3Forms form. */
 export default function ContactPage() {
   return <ScreenStub title={t.contact.title} subtitle={t.contact.subtitle} />;
 }

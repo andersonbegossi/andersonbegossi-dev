@@ -1,6 +1,6 @@
 # ADR 0004 — Contact form delivers via Formspree
 
-**Status:** accepted (2026-07-11)
+**Status:** superseded by ADR 0009 (2026-10-12) — accepted 2026-07-11
 
 ## Context
 

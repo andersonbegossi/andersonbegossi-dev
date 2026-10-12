@@ -60,8 +60,9 @@ See `docs/adr/`:
 - 0001 — Next.js with full static generation
 - 0002 — i18n URL structure: EN at root, `/pt/` prefix
 - 0003 — Blog content as MDX, one file per post per locale
-- 0004 — Contact form delivers via Formspree
+- 0004 — Contact form delivers via Formspree (superseded by 0009)
 - 0005 — Hosting on Vercel
 - 0006 — Directory-style URLs with a trailing slash
 - 0007 — Biome for linting and formatting
 - 0008 — CSS Modules and no component library
+- 0009 — Contact form delivers via Web3Forms

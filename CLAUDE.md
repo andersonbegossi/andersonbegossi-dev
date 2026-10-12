@@ -35,8 +35,8 @@ lint-staged plus `typecheck`.
 
 - `CONTEXT.md` — glossary (Screen, Locale, Post, Project card, Accent), fixed facts, and the
   **link policy**. Read it before adding any user-visible link or naming a domain concept.
-- `docs/adr/0001`–`0008` — the binding decisions (static export, i18n URL shape, MDX blog,
-  Formspree contact, Vercel, trailing-slash URLs, Biome, CSS Modules). Surface a conflict
+- `docs/adr/0001`–`0009` — the binding decisions (static export, i18n URL shape, MDX blog,
+  Vercel, trailing-slash URLs, Biome, CSS Modules, Web3Forms contact). Surface a conflict
   explicitly instead of silently overriding an ADR.
 - `docs/design/portfolio.dc.html` — the design snapshot this site implements faithfully.
   Tokens, copy and layout come from it verbatim; it is excluded from Biome.
@@ -46,7 +46,7 @@ lint-staged plus `typecheck`.
 **Static export is a hard constraint.** `next.config.ts` sets `output: 'export'`,
 `trailingSlash: true`, `images.unoptimized`. No route handlers, no server actions, no runtime
 server features — anything dynamic must be client-side or a third-party endpoint (hence
-Formspree for contact, ADR 0004).
+Web3Forms for contact, ADR 0009).
 
 **Single source of truth per concern:**
 
