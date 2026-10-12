@@ -61,7 +61,6 @@ LINKS = SEP.join(
     [
         link("https://www.linkedin.com/in/andersonbegossi", "linkedin.com/in/andersonbegossi"),
         link("https://github.com/andersonbegossi", "github.com/andersonbegossi"),
-        link("https://github.com/ambegossi", "github.com/ambegossi"),
     ]
 )
 EMAIL = link("mailto:andersonbegossi@gmail.com", "andersonbegossi@gmail.com")
