@@ -57,6 +57,10 @@ Formspree for contact, ADR 0004).
 - `src/lib/i18n/locale.ts` — the only place that knows the `/pt` prefix. `localePath` builds a
   locale's URL for a *screen path* (`/`, `/about`), `screenFromPathname` reads one back.
 - `src/lib/data/projects.ts` — project cards, with the link policy already applied.
+- `src/lib/blog/posts.ts` — the only reader of `content/blog/<slug>/{en,pt}.mdx`. `loadPosts`
+  returns a locale's posts newest first and throws on malformed frontmatter, failing the build.
+  It uses `node:fs`, so client code imports post URLs and date formatting from
+  `src/lib/blog/format.ts` instead.
 - `src/app/globals.css` — the light/dark token set (`--bg`, `--fg`, `--muted`, `--faint`,
   `--border`, `--card`, `--code`, `--accent`). Component styles are CSS Modules that consume
   these tokens; no component library (ADR 0008).

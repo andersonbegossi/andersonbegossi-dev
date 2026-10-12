@@ -52,6 +52,7 @@ export const pt: Dictionary = {
     featured: 'Destaque',
     minRead: 'min de leitura',
     noResults: 'Nenhum artigo encontrado — tente outra busca.',
+    empty: 'Nenhum artigo ainda — o primeiro está a caminho.',
   },
   resume: {
     title: 'Currículo',

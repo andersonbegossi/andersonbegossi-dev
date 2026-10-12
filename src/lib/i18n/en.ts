@@ -52,6 +52,7 @@ export const en: Dictionary = {
     featured: 'Featured',
     minRead: 'min read',
     noResults: 'No articles found — try another search.',
+    empty: 'No posts yet — the first one is on its way.',
   },
   resume: {
     title: 'Resume',

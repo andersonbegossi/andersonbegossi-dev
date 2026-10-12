@@ -74,9 +74,9 @@ describe('Home screen', () => {
     );
   });
 
-  it('does not show the writing section yet', () => {
+  it('leaves out the writing section while no posts are published', () => {
     renderRoute(<HomePage />);
 
-    expect(screen.queryByText('Writing')).not.toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: 'Writing' })).not.toBeInTheDocument();
   });
 });

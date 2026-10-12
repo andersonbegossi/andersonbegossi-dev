@@ -49,4 +49,10 @@ describe('Portuguese Home screen', () => {
       '/pt/projects',
     );
   });
+
+  it('leaves out the writing section while no posts are published', () => {
+    renderRoute(<HomePage />, PT_HOME);
+
+    expect(screen.queryByRole('region', { name: 'Artigos' })).not.toBeInTheDocument();
+  });
 });
