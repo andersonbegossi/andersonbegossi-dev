@@ -1,4 +1,5 @@
 import type { Locale } from '@/lib/i18n/locale';
+import { siteConfig } from '@/lib/site-config';
 
 export type Project = {
   slug: string;
@@ -6,6 +7,8 @@ export type Project = {
   name: string;
   desc: Record<Locale, string>;
   tech: readonly string[];
+  /** What the card's image placeholder says it is waiting for, until a real screenshot exists. */
+  placeholder: Record<Locale, string>;
   /** Link policy (CONTEXT.md): omitted while the repository is not public. */
   github?: string;
   /** Omitted while nothing is actually deployed at the target. */
@@ -28,6 +31,7 @@ export const projects: readonly Project[] = [
       pt: 'App de apoio à decisão clínica que aplica o modelo físico-químico de Stewart à análise ácido-base, com cálculos confiáveis à beira do leito.',
     },
     tech: ['React Native', 'TypeScript'],
+    placeholder: { en: 'app screenshot', pt: 'screenshot do app' },
   },
   {
     slug: 'voce-mais-saude',
@@ -37,6 +41,7 @@ export const projects: readonly Project[] = [
       pt: 'App de acompanhamento de saúde com backend em Node.js — hábitos, sinais vitais e progresso em um só lugar.',
     },
     tech: ['React Native', 'Node.js', 'AdonisJS'],
+    placeholder: { en: 'app screenshot', pt: 'screenshot do app' },
   },
   {
     slug: 'rn-monorepo-starter',
@@ -46,6 +51,7 @@ export const projects: readonly Project[] = [
       pt: 'Template React Native pronto para produção: monorepo, pacote de UI compartilhado, temas, testes e CI configurados.',
     },
     tech: ['Expo', 'Turborepo', 'TypeScript'],
+    placeholder: { en: 'repo preview', pt: 'preview do repo' },
   },
   {
     slug: 'begossi-dev',
@@ -55,7 +61,8 @@ export const projects: readonly Project[] = [
       pt: 'Este site — portfólio e blog técnico bilíngue, com temas e foco em tipografia e performance.',
     },
     tech: ['Next.js', 'MDX', 'i18n'],
-    github: 'https://github.com/andersonbegossi/abegossi',
+    placeholder: { en: 'site screenshot', pt: 'screenshot do site' },
+    github: siteConfig.repo,
   },
 ];
 

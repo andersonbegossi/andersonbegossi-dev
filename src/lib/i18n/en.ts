@@ -12,6 +12,7 @@ export const en: Dictionary = {
     home: 'Home',
     switchLanguage: 'Switch language',
     toggleTheme: 'Toggle theme',
+    techStack: 'Tech stack',
   },
   notFound: {
     title: 'Page not found',
