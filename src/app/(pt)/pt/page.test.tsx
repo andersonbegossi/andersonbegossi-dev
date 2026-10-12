@@ -35,14 +35,13 @@ describe('Portuguese Home screen', () => {
     );
   });
 
-  it('previews the featured projects with their Portuguese descriptions', () => {
+  it('previews the featured project with its Portuguese description', () => {
     renderRoute(<HomePage />, PT_HOME);
 
     const selectedWork = screen.getByRole('region', { name: 'Trabalhos selecionados' });
 
-    expect(within(selectedWork).getByText(/App de apoio à decisão clínica/)).toBeInTheDocument();
     expect(
-      within(selectedWork).getByText(/App de acompanhamento de saúde com backend/),
+      within(selectedWork).getByText(/Este site — portfólio e blog técnico bilíngue/),
     ).toBeInTheDocument();
     expect(within(selectedWork).getByRole('link', { name: /Ver todos/ })).toHaveAttribute(
       'href',

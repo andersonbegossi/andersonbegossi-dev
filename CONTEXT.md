@@ -34,10 +34,11 @@ and clients: SEO and shareable URLs are requirements, not nice-to-haves.
 ## Link policy
 
 A visible link must resolve. Project GitHub/Live buttons are omitted while the target
-repo is private/nonexistent (`stewart-acid-base`, `voce-mais-saude`,
-`rn-monorepo-starter` all 404 publicly today). Exception: the `begossi.dev` project
-card links to this repository (`github.com/andersonbegossi/abegossi`), which is public.
-The design's placeholder `apps.apple.com` "Live" link is dropped.
+repo is private/nonexistent. The design's other project cards (`stewart-acid-base`,
+`voce-mais-saude`, `rn-monorepo-starter`, all 404 publicly today) are not shown at all;
+the only card, `begossi.dev`, links to this repository
+(`github.com/andersonbegossi/abegossi`), which is public. The design's placeholder
+`apps.apple.com` "Live" link is dropped.
 
 Two design controls needed correcting under this rule:
 

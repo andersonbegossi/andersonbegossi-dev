@@ -13,24 +13,24 @@ describe('Projects screen', () => {
     expect(screen.getByText(/Personal projects and apps I’ve designed/)).toBeInTheDocument();
   });
 
-  it('shows the four project cards with description and tech chips', () => {
+  it('shows only the begossi.dev card with description and tech chips', () => {
     renderRoute(<ProjectsPage />, PROJECTS);
 
     const cards = screen.getAllByRole('article');
     expect(
       cards.map((card) => within(card).getByRole('heading', { level: 2 }).textContent),
-    ).toEqual(['Stewart Acid-Base', 'Você + Saúde', 'RN Monorepo Starter', 'begossi.dev']);
+    ).toEqual(['begossi.dev']);
 
-    const starter = screen.getByRole('article', { name: 'RN Monorepo Starter' });
-    expect(within(starter).getByText(/Production-ready React Native template/)).toBeInTheDocument();
+    const site = screen.getByRole('article', { name: 'begossi.dev' });
+    expect(within(site).getByText(/This website — a bilingual, themeable/)).toBeInTheDocument();
     expect(
-      within(within(starter).getByRole('list', { name: /tech/i }))
+      within(within(site).getByRole('list', { name: /tech/i }))
         .getAllByRole('listitem')
         .map((chip) => chip.textContent),
-    ).toEqual(['Expo', 'Turborepo', 'TypeScript']);
+    ).toEqual(['Next.js', 'MDX', 'i18n']);
   });
 
-  it('only links begossi.dev to this repository and shows no Live buttons', () => {
+  it('links begossi.dev to this repository and shows no Live buttons', () => {
     renderRoute(<ProjectsPage />, PROJECTS);
 
     const main = screen.getByRole('main');

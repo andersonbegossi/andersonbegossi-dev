@@ -6,11 +6,11 @@ import ProjectsPage from './page';
 const PT_PROJECTS = '/pt/projects';
 
 describe('Portuguese Projects screen', () => {
-  it('shows the screen and the four cards in Portuguese', () => {
+  it('shows the screen and the begossi.dev card in Portuguese', () => {
     renderRoute(<ProjectsPage />, PT_PROJECTS);
 
     expect(screen.getByRole('heading', { level: 1, name: 'Projetos' })).toBeInTheDocument();
-    expect(screen.getAllByRole('article')).toHaveLength(4);
+    expect(screen.getAllByRole('article')).toHaveLength(1);
     expect(
       within(screen.getByRole('article', { name: 'begossi.dev' })).getByText(
         /Este site — portfólio e blog técnico bilíngue/,

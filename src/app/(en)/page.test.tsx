@@ -51,23 +51,18 @@ describe('Home screen', () => {
     );
   });
 
-  it('previews two featured projects that lead to the projects screen', () => {
+  it('previews the featured begossi.dev project, leading to the projects screen', () => {
     renderRoute(<HomePage />);
 
     const selectedWork = screen.getByRole('region', { name: 'Selected work' });
-    const cards = within(selectedWork).getAllByRole('link', {
-      name: /Stewart Acid-Base|Você \+ Saúde/,
-    });
+    const card = within(selectedWork).getByRole('link', { name: /begossi\.dev/ });
 
-    expect(cards).toHaveLength(2);
-    expect(cards[0]).toHaveAccessibleName(/Stewart Acid-Base/);
-    expect(cards[1]).toHaveAccessibleName(/Você \+ Saúde/);
-    for (const card of cards) {
-      expect(card).toHaveAttribute('href', '/projects');
-    }
-
-    expect(within(selectedWork).getByText(/React Native · TypeScript/)).toBeInTheDocument();
-    expect(within(selectedWork).getByText(/Clinical decision-support app/)).toBeInTheDocument();
+    expect(card).toHaveAttribute('href', '/projects');
+    expect(within(selectedWork).getByText(/Next\.js · MDX · i18n/)).toBeInTheDocument();
+    expect(
+      within(selectedWork).getByText(/This website — a bilingual, themeable/),
+    ).toBeInTheDocument();
+    expect(within(selectedWork).queryByText(/Stewart Acid-Base/)).not.toBeInTheDocument();
     expect(within(selectedWork).getByRole('link', { name: /View all/ })).toHaveAttribute(
       'href',
       '/projects',
