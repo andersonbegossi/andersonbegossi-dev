@@ -13,7 +13,8 @@ and clients: SEO and shareable URLs are requirements, not nice-to-haves.
   there is no `/resume` route.
 - **Locale** — `en` (default, served at the URL root) or `pt` (Brazilian Portuguese,
   served under the `/pt/` prefix). Every page exists in both locales with `hreflang`
-  links between the pair.
+  links between the pair, except a Post's Article page: it exists only in the locales
+  the Post has a file for (ADR 0003).
 - **Post** — a blog article authored as MDX, one file per locale:
   `content/blog/<slug>/{en,pt}.mdx`. Frontmatter: `title`, `excerpt`, `date`,
   `category`, `tags`, `minutes`, `featured`.

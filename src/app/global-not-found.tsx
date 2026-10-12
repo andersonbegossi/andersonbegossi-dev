@@ -1,6 +1,5 @@
 import { RootDocument } from '@/components/root-document';
-import { ScreenStub } from '@/components/screen-stub';
-import { getDictionary } from '@/lib/i18n';
+import { NotFoundScreen } from '@/components/not-found-screen';
 import { defaultLocale } from '@/lib/i18n/locale';
 import { localeMetadata } from '@/lib/metadata';
 
@@ -14,11 +13,9 @@ import { localeMetadata } from '@/lib/metadata';
 export const metadata = localeMetadata(defaultLocale);
 
 export default function GlobalNotFound() {
-  const t = getDictionary(defaultLocale);
-
   return (
     <RootDocument locale={defaultLocale}>
-      <ScreenStub title={t.notFound.title} subtitle={t.notFound.subtitle} />
+      <NotFoundScreen locale={defaultLocale} />
     </RootDocument>
   );
 }

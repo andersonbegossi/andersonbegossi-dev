@@ -13,6 +13,7 @@ export const pt: Dictionary = {
     switchLanguage: 'Mudar idioma',
     toggleTheme: 'Alternar tema',
     techStack: 'Tecnologias',
+    tags: 'Tags',
   },
   notFound: {
     title: 'Página não encontrada',

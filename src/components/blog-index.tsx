@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { formatPostDate, postPath } from '@/lib/blog/format';
+import { formatPostMeta, postPath } from '@/lib/blog/format';
 import type { PostSummary } from '@/lib/blog/posts';
 import { getDictionary } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n/locale';
@@ -39,8 +39,6 @@ export function BlogIndex({ locale, posts, featured, labelledBy }: Props) {
   const listed = filtering
     ? posts.filter(matches)
     : posts.filter((post) => post.slug !== featured?.slug);
-  const meta = (post: PostSummary) =>
-    `${formatPostDate(post.date, locale)} · ${post.minutes} ${t.blog.minRead}`;
 
   return (
     <>
@@ -72,7 +70,7 @@ export function BlogIndex({ locale, posts, featured, labelledBy }: Props) {
           <span className={styles.featuredLabel}>★ {t.blog.featured}</span>
           <span className={styles.featuredTitle}>{featured.title}</span>
           <span className={styles.featuredExcerpt}>{featured.excerpt}</span>
-          <span className={styles.meta}>{meta(featured)}</span>
+          <span className={styles.meta}>{formatPostMeta(featured, locale)}</span>
         </Link>
       ) : null}
 
@@ -84,7 +82,7 @@ export function BlogIndex({ locale, posts, featured, labelledBy }: Props) {
                 <span className={styles.category}>{post.category}</span>
                 <span className={styles.rowTitle}>{post.title}</span>
                 <span className={styles.rowExcerpt}>{post.excerpt}</span>
-                <span className={styles.meta}>{meta(post)}</span>
+                <span className={styles.meta}>{formatPostMeta(post, locale)}</span>
               </Link>
             </li>
           ))}

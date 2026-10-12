@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { type Dictionary, getDictionary } from '@/lib/i18n';
 import {
+  type Locale,
   localeFromPathname,
   localePath,
   screenFromPathname,
@@ -25,7 +26,7 @@ const navItems = [
  * screen is routed per locale (ADR 0002), so the pathname already says which
  * language the visitor is reading and no page has to thread it down.
  */
-export function Header() {
+export function Header({ untranslated }: { untranslated: Record<Locale, readonly string[]> }) {
   const pathname = usePathname();
   const locale = localeFromPathname(pathname);
   const screen = screenFromPathname(pathname);
@@ -49,7 +50,7 @@ export function Header() {
             </Link>
           ))}
         </div>
-        <LanguageToggle locale={locale} screen={screen} />
+        <LanguageToggle locale={locale} screen={screen} untranslated={untranslated} />
         <ThemeToggle locale={locale} />
       </nav>
     </header>

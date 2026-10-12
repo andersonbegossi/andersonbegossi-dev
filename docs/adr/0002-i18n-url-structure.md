@@ -18,6 +18,9 @@ locale (persisting the preference), rather than swapping strings in place.
 ## Consequences
 
 - Clean unprefixed URLs for the primary language; both languages fully indexed.
-- Static generation must enumerate every route twice (en + pt).
+- Static generation must enumerate every route twice (en + pt). (Amended 2026-10-12: a
+  post is the exception — ADR 0003 publishes it only in the locales it has a file for, so
+  its `hreflang` pairs only the translations that exist, and the language toggle on a
+  post with no translation lands on the other locale's Blog instead.)
 - No automatic locale redirect at the root (that would need middleware — ADR 0001);
   visitors land on English and can switch.

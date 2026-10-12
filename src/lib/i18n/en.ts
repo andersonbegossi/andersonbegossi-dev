@@ -13,6 +13,7 @@ export const en: Dictionary = {
     switchLanguage: 'Switch language',
     toggleTheme: 'Toggle theme',
     techStack: 'Tech stack',
+    tags: 'Tags',
   },
   notFound: {
     title: 'Page not found',

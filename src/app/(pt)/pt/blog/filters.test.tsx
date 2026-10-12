@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { renderRoute } from '@/test/render-route';
 import BlogPage from './page';
 
-vi.mock('@/lib/blog/posts', () => import('@/test/fixture-posts').then((m) => m.withFixturePosts()));
+vi.mock('@/lib/blog/posts', () => import('@/test/fixture-index-posts'));
 
 const sharingCode = 'Compartilhando código entre três apps React Native em produção';
 const biometricAuth = 'Autenticação biométrica em React Native, do jeito certo';

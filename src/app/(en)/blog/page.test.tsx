@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { screen, within } from '@testing-library/react';
 import { renderRoute } from '@/test/render-route';
 import BlogPage from './page';
+import ArticlePage, { generateMetadata, generateStaticParams } from './[slug]/page';
 
 describe('Blog screen', () => {
   it('introduces the blog', () => {
@@ -27,5 +28,17 @@ describe('Blog screen', () => {
     expect(screen.queryByText(/★ Featured/)).not.toBeInTheDocument();
     expect(screen.queryByRole('list', { name: 'Blog' })).not.toBeInTheDocument();
     expect(screen.queryByRole('searchbox')).not.toBeInTheDocument();
+  });
+
+  it('generates no article while none are published, only an unindexed 404', async () => {
+    // A static export refuses a dynamic route with no pages, so one placeholder stands in.
+    const generated = generateStaticParams();
+    expect(generated).toHaveLength(1);
+    const params = Promise.resolve(generated[0]);
+
+    renderRoute(await ArticlePage({ params }), `/blog/${generated[0].slug}`);
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Page not found' })).toBeInTheDocument();
+    expect((await generateMetadata({ params })).robots).toEqual({ index: false });
   });
 });

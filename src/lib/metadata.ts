@@ -1,6 +1,15 @@
 import type { Metadata } from 'next';
+import { type PostScreenPath, postScreen } from './blog/format';
+import type { Post } from './blog/posts';
 import { getDictionary } from './i18n';
-import { htmlLang, localePath, type Locale, type ScreenPath } from './i18n/locale';
+import {
+  defaultLocale,
+  htmlLang,
+  localePath,
+  type Locale,
+  locales,
+  type ScreenPath,
+} from './i18n/locale';
 import { siteConfig } from './site-config';
 
 /** Title and description for a locale's root layout — inherited by its pages. */
@@ -20,21 +29,40 @@ export function localeMetadata(locale: Locale): Metadata {
  * claim the same canonical URL for every page underneath it.
  */
 export function screenMetadata(locale: Locale, screen: ScreenPath): Metadata {
+  return { alternates: alternates(screen, locale, locales) };
+}
+
+/**
+ * An Article screen's title, description, canonical URL and `hreflang` links.
+ * A post is published in a locale only where its file exists (ADR 0003), so it
+ * pairs with just the translations it has — never one that would 404.
+ */
+export function postMetadata(post: Post): Metadata {
   return {
-    alternates: {
-      canonical: canonicalUrl(screen, locale),
-      languages: {
-        [htmlLang.en]: canonicalUrl(screen, 'en'),
-        [htmlLang.pt]: canonicalUrl(screen, 'pt'),
-        /** No locale redirect at the root (ADR 0002), so English is the default. */
-        'x-default': canonicalUrl(screen, 'en'),
-      },
+    title: `${post.title} — ${siteConfig.author}`,
+    description: post.excerpt,
+    alternates: alternates(postScreen(post.slug), post.locale, post.locales),
+  };
+}
+
+function alternates(
+  screen: ScreenPath | PostScreenPath,
+  locale: Locale,
+  published: readonly Locale[],
+): Metadata['alternates'] {
+  /** No locale redirect at the root (ADR 0002), so English is the default where it exists. */
+  const fallback = published.includes(defaultLocale) ? defaultLocale : locale;
+  return {
+    canonical: canonicalUrl(screen, locale),
+    languages: {
+      ...Object.fromEntries(published.map((l) => [htmlLang[l], canonicalUrl(screen, l)])),
+      'x-default': canonicalUrl(screen, fallback),
     },
   };
 }
 
 /** The site publishes directory-style URLs (ADR 0006), so canonicals end in a slash. */
-function canonicalUrl(screen: ScreenPath, locale: Locale): string {
+function canonicalUrl(screen: ScreenPath | PostScreenPath, locale: Locale): string {
   const path = localePath(screen, locale);
   return path.endsWith('/') ? path : `${path}/`;
 }
