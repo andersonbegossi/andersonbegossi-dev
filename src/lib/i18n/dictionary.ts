@@ -68,5 +68,10 @@ export type Dictionary = {
     send: string;
     sentTitle: string;
     sentBody: string;
+    /**
+     * Shown when Web3Forms rejects the submission. The design only fakes
+     * success, so this line is ours, in that voice.
+     */
+    error: string;
   };
 };

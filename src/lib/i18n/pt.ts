@@ -67,5 +67,6 @@ export const pt: Dictionary = {
     send: 'Enviar mensagem',
     sentTitle: 'Mensagem enviada!',
     sentBody: 'Obrigado pelo contato — respondo em breve.',
+    error: 'Não foi possível enviar — tente de novo, ou use o e-mail acima.',
   },
 };
