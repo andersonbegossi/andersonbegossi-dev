@@ -58,7 +58,13 @@ export function ContactForm({ locale }: { locale: Locale }) {
 
   if (status === 'success') {
     return (
-      <div role="status" tabIndex={-1} ref={confirmationRef} className={styles.success}>
+      <div
+        role="status"
+        data-variant="success"
+        tabIndex={-1}
+        ref={confirmationRef}
+        className={styles.success}
+      >
         <p className={styles.sentTitle}>{t.contact.sentTitle}</p>
         <p className={styles.sentBody}>{t.contact.sentBody}</p>
       </div>
@@ -97,7 +103,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
         aria-hidden="true"
       />
       {status === 'error' ? (
-        <p role="alert" className={styles.error}>
+        <p role="alert" data-variant="error" className={styles.error}>
           {t.contact.error}
         </p>
       ) : null}

@@ -1,6 +1,9 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { screen, within } from '@testing-library/react';
+import { cleanup, screen, within } from '@testing-library/react';
 import userEvent, { type UserEvent } from '@testing-library/user-event';
+import styles from '@/components/contact-screen.module.css';
 import { renderRoute } from '@/test/render-route';
 import ContactPage from './page';
 
@@ -118,6 +121,42 @@ describe('Contact screen', () => {
     });
   });
 
+  it('gives the success and error states different variants', async () => {
+    const css = readFileSync(
+      join(process.cwd(), 'src/components/contact-screen.module.css'),
+      'utf8',
+    );
+    const successRule = cssBlock(css, '.success') + cssBlock(css, '.sentTitle');
+    const errorRule = cssBlock(css, '.error');
+    expect(successRule).not.toContain('--accent');
+    expect(errorRule).toContain('--accent');
+
+    const user = renderConfigured();
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({ ok: true, json: async () => ({ success: true }) }),
+    );
+    await fillAndSend(user);
+    const status = await screen.findByRole('status');
+    expect(status).toHaveAttribute('data-variant', 'success');
+    expect(status).toHaveClass(styles.success);
+    expect(status).not.toHaveClass(styles.error);
+
+    cleanup();
+
+    const again = renderConfigured();
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({ ok: false, json: async () => ({ success: false }) }),
+    );
+    await fillAndSend(again);
+    const alert = await screen.findByRole('alert');
+    expect(alert).toHaveAttribute('data-variant', 'error');
+    expect(alert).toHaveClass(styles.error);
+    expect(alert).not.toHaveClass(styles.success);
+    expect(alert.getAttribute('data-variant')).not.toBe(status.getAttribute('data-variant'));
+  });
+
   it('keeps the message and shows an error when Web3Forms rejects it', async () => {
     const user = renderConfigured();
     vi.stubGlobal(
@@ -172,6 +211,11 @@ describe('Contact screen', () => {
     expect(await screen.findByRole('status')).toBeInTheDocument();
   });
 });
+
+function cssBlock(css: string, selector: string): string {
+  const escaped = selector.replace('.', '\\.');
+  return css.match(new RegExp(`${escaped}\\s*\\{[^}]*\\}`))?.[0] ?? '';
+}
 
 function renderConfigured(): UserEvent {
   vi.stubEnv('NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY', ACCESS_KEY);

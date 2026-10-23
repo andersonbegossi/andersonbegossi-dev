@@ -118,10 +118,13 @@
   color: var(--accent);
 }
 
+/* Neutral card. `--accent` is the brand red and is reserved for the error
+   line; the design snapshot painted this card with it, and a real submission
+   read as a failure. */
 .success {
   margin-top: 44px;
-  border: 1px solid var(--accent);
-  background: color-mix(in srgb, var(--accent) 7%, var(--card));
+  border: 1px solid var(--border);
+  background: var(--card);
   border-radius: 12px;
   padding: 24px 26px;
 }
@@ -130,7 +133,7 @@
   margin: 0;
   font-size: 15px;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--fg);
 }
 
 .sentBody {
