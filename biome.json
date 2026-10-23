@@ -6,7 +6,15 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!.next", "!out", "!next-env.d.ts", "!tsconfig.tsbuildinfo", "!docs/design"]
+    "includes": [
+      "**",
+      "!.next",
+      "!out",
+      "!next-env.d.ts",
+      "!tsconfig.tsbuildinfo",
+      "!docs/design",
+      "!.yarn/releases"
+    ]
   },
   "formatter": {
     "enabled": true,
