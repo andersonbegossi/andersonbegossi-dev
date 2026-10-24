@@ -12,7 +12,7 @@ describe('Portuguese Contact screen', () => {
   });
 
   it('shows the Portuguese title, the mailto link and the profiles, with no form', () => {
-    vi.stubEnv('NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY', 'placeholder');
+    vi.stubEnv('NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY', '');
     renderRoute(<ContactPage />, '/pt/contact');
 
     expect(screen.getByRole('heading', { level: 1, name: 'Contato' })).toBeInTheDocument();

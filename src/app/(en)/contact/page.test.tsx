@@ -47,16 +47,13 @@ describe('Contact screen', () => {
     );
   });
 
-  it.each(['', 'placeholder', '   ', '  placeholder  '])(
-    'renders no form while the access key is %j',
-    (key) => {
-      vi.stubEnv('NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY', key);
-      renderRoute(<ContactPage />, '/contact');
+  it.each(['', '   '])('renders no form while the access key is %j', (key) => {
+    vi.stubEnv('NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY', key);
+    renderRoute(<ContactPage />, '/contact');
 
-      expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
-      expect(screen.queryByRole('button', { name: /Send message/ })).not.toBeInTheDocument();
-    },
-  );
+    expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Send message/ })).not.toBeInTheDocument();
+  });
 
   it('renders the required fields once a key is configured', () => {
     renderConfigured();

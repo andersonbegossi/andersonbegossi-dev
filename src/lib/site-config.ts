@@ -30,17 +30,13 @@ export const siteConfig = {
 export const web3formsEndpoint = 'https://api.web3forms.com/submit';
 
 /**
- * Sentinel for `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`. The Contact screen hides the
- * form while that variable is unset, blank, or still this value; the mailto
- * link is the fallback until Anderson sets a real key. Next inlines every
- * `NEXT_PUBLIC_*` variable into the static export at build time, and the key
- * is public in the client bundle by design (ADR 0009).
+ * The access key from `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`, or `undefined` when
+ * that variable is unset or blank. The Contact screen hides the form in that
+ * case; the mailto link is the fallback until a real key is set. Next inlines
+ * every `NEXT_PUBLIC_*` variable into the static export at build time, and the
+ * key is public in the client bundle by design (ADR 0009).
  */
-export const web3formsAccessKeyPlaceholder = 'placeholder';
-
-/** The configured access key, or `undefined` while it is still the placeholder. */
 export function web3formsAccessKey(): string | undefined {
   const key = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
-  if (!key || key === web3formsAccessKeyPlaceholder) return undefined;
-  return key;
+  return key || undefined;
 }

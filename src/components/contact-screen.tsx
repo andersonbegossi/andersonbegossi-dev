@@ -6,7 +6,7 @@ import styles from './contact-screen.module.css';
 
 /**
  * The Contact screen body, rendered by the routed page of each locale.
- * The form is omitted while the Web3Forms key is still the placeholder
+ * The form is omitted while the Web3Forms key is unset or blank
  * (ADR 0009); the mailto link is the fallback that always works.
  */
 export function ContactScreen({ locale }: { locale: Locale }) {
