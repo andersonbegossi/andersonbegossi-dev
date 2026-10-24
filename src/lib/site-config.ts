@@ -22,3 +22,21 @@ export const siteConfig = {
   } satisfies Record<Locale, { href: string; fileName: string }>,
   heroPhoto: '/hero-photo.webp',
 } as const;
+
+/**
+ * Web3Forms endpoint for the Contact screen (ADR 0009). The browser POSTs here
+ * directly — a static export has no server of its own (ADR 0001).
+ */
+export const web3formsEndpoint = 'https://api.web3forms.com/submit';
+
+/**
+ * The access key from `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`, or `undefined` when
+ * that variable is unset or blank. The Contact screen hides the form in that
+ * case; the mailto link is the fallback until a real key is set. Next inlines
+ * every `NEXT_PUBLIC_*` variable into the static export at build time, and the
+ * key is public in the client bundle by design (ADR 0009).
+ */
+export function web3formsAccessKey(): string | undefined {
+  const key = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
+  return key || undefined;
+}

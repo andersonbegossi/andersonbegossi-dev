@@ -16,10 +16,10 @@ $0 for contact, and it is still a static export (ADR 0001) with no server of its
 
 The form POSTs from the browser to Web3Forms on its free tier (250 submissions/month,
 unlimited forms, marketed for static sites, delivery to andersonbegossi@gmail.com).
-Anderson creates the Web3Forms access key; it lives in site config (placeholder until
-provided). Everything else ADR 0004 required stands: the `mailto:` link is the
-always-works fallback, the designed success card renders on success, and while the key
-is still the placeholder the form is not rendered at all.
+Anderson creates the Web3Forms access key; it lives in
+`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`. Everything else ADR 0004 required stands: the
+`mailto:` link is the always-works fallback, the designed success card renders on
+success, and while the key is unset or blank the form is not rendered at all.
 
 ## Considered options
 
