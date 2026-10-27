@@ -177,7 +177,7 @@ describe('sitemap and robots', () => {
 });
 
 describe('404 metadata', () => {
-  it('names the missing page and asks crawlers not to index it', () => {
+  it('names the missing page from the dictionary', () => {
     expect(notFound.title).toBe(`${en.notFound.title} — ${siteConfig.author}`);
     expect(notFound.description).toBe(en.notFound.subtitle);
     expect(notFound.metadataBase).toEqual(new URL(siteConfig.baseUrl));

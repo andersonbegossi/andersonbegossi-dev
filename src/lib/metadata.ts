@@ -35,8 +35,7 @@ const screenCopy: Record<ScreenPath, (t: Dictionary) => { title: string; descrip
 
 /**
  * Title, description and base URL for a locale's root layout. Pages that don't
- * set their own inherit the Home screen's, which is the right fallback for the
- * one placeholder article route and nothing else.
+ * set their own inherit the Home screen's.
  */
 export function localeMetadata(locale: Locale): Metadata {
   const home = screenCopy['/'](getDictionary(locale));
@@ -115,4 +114,13 @@ export function notFoundMetadata(locale: Locale): Metadata {
     title: pageTitle(t.notFound.title),
     description: t.notFound.subtitle,
   };
+}
+
+/**
+ * The empty-blog placeholder is a real 200 that renders the 404. Next does not
+ * inject `noindex` for it the way it does for `global-not-found`, so this sets
+ * the tag, and it wears the 404 title rather than Home's.
+ */
+export function placeholderArticleMetadata(locale: Locale): Metadata {
+  return { ...notFoundMetadata(locale), robots: { index: false } };
 }

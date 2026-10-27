@@ -18,6 +18,10 @@ describe('404 screen', () => {
     expect(screen.getByRole('heading', { level: 1, name: en.notFound.title })).toBeInTheDocument();
     expect(screen.getByText(en.notFound.subtitle)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: `← ${en.a11y.home}` })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: en.a11y.switchLanguage })).toHaveAttribute(
+      'href',
+      '/pt',
+    );
   });
 
   it('speaks Portuguese on a Portuguese page', () => {
@@ -35,6 +39,7 @@ describe('404 screen', () => {
       await screen.findByRole('heading', { level: 1, name: pt.notFound.title }),
     ).toBeInTheDocument();
     expect(screen.getByRole('link', { name: `← ${pt.a11y.home}` })).toHaveAttribute('href', '/pt');
+    expect(screen.getByRole('link', { name: pt.a11y.switchLanguage })).toHaveAttribute('href', '/');
     expect(document.documentElement).toHaveAttribute('lang', 'pt-BR');
     expect(document.title).toBe(`${pt.notFound.title} — ${siteConfig.author}`);
   });
