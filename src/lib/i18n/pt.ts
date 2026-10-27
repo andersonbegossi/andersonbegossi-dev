@@ -44,7 +44,7 @@ export const pt: Dictionary = {
   projects: {
     title: 'Projetos',
     subtitle:
-      'Projetos pessoais e apps que projetei, construí e publiquei — arraste screenshots reais para os placeholders.',
+      'Projetos pessoais e apps que projetei, construí e publiquei',
     demo: 'Demo',
   },
   blog: {

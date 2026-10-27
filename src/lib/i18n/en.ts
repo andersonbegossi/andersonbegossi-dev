@@ -44,7 +44,7 @@ export const en: Dictionary = {
   projects: {
     title: 'Projects',
     subtitle:
-      'Personal projects and apps I’ve designed, built and shipped — drop real screenshots into the placeholders.',
+      'Personal projects and apps I’ve designed, built and shipped',
     demo: 'Live',
   },
   blog: {
