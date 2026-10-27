@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { screen } from '@testing-library/react';
 import { en } from '@/lib/i18n/en';
 import { pt } from '@/lib/i18n/pt';
+import { siteConfig } from '@/lib/site-config';
 import { renderRoute } from '@/test/render-route';
 import { NotFoundScreen } from './not-found-screen';
 
@@ -35,5 +36,6 @@ describe('404 screen', () => {
     ).toBeInTheDocument();
     expect(screen.getByRole('link', { name: `← ${pt.a11y.home}` })).toHaveAttribute('href', '/pt');
     expect(document.documentElement).toHaveAttribute('lang', 'pt-BR');
+    expect(document.title).toBe(`${pt.notFound.title} — ${siteConfig.author}`);
   });
 });

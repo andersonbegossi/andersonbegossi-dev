@@ -10,6 +10,7 @@ import {
   localeFromPathname,
   localePath,
 } from '@/lib/i18n/locale';
+import { siteConfig } from '@/lib/site-config';
 import { ScreenStub } from './screen-stub';
 import styles from './not-found-screen.module.css';
 
@@ -39,8 +40,10 @@ function useNotFoundLocale(locale: Locale): Locale {
     if (locale !== defaultLocale) return;
     const fromUrl = localeFromPathname(window.location.pathname);
     if (fromUrl === defaultLocale) return;
-    setResolved(fromUrl);
+    const copy = getDictionary(fromUrl);
     document.documentElement.lang = htmlLang[fromUrl];
+    document.title = `${copy.notFound.title} — ${siteConfig.author}`;
+    setResolved(fromUrl);
   }, [locale]);
 
   return resolved;
