@@ -43,8 +43,7 @@ export const en: Dictionary = {
   },
   projects: {
     title: 'Projects',
-    subtitle:
-      'Personal projects and apps I’ve designed, built and shipped',
+    subtitle: 'Personal projects and apps I’ve designed, built and shipped',
     demo: 'Live',
   },
   blog: {
