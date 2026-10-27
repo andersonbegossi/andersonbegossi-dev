@@ -103,13 +103,16 @@ export function absoluteUrl(screen: ScreenPath | PostScreenPath, locale: Locale)
   return new URL(canonicalUrl(screen, locale), siteConfig.baseUrl).href;
 }
 
-/** The global 404 has no layout of its own, so it carries the base URL and a noindex. */
+/**
+ * The global 404 has no layout of its own, so it carries the base URL.
+ * Next injects `noindex` for this file. Setting `robots` here as well ships
+ * a second tag.
+ */
 export function notFoundMetadata(locale: Locale): Metadata {
   const t = getDictionary(locale);
   return {
     ...localeMetadata(locale),
     title: pageTitle(t.notFound.title),
     description: t.notFound.subtitle,
-    robots: { index: false, follow: true },
   };
 }

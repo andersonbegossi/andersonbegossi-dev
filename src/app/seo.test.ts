@@ -180,7 +180,7 @@ describe('404 metadata', () => {
   it('names the missing page and asks crawlers not to index it', () => {
     expect(notFound.title).toBe(`${en.notFound.title} — ${siteConfig.author}`);
     expect(notFound.description).toBe(en.notFound.subtitle);
-    expect(notFound.robots).toEqual({ index: false, follow: true });
     expect(notFound.metadataBase).toEqual(new URL(siteConfig.baseUrl));
+    expect(notFound.robots).toBeUndefined();
   });
 });
