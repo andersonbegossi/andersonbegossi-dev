@@ -39,6 +39,9 @@ describe('Blog screen', () => {
     renderRoute(await ArticlePage({ params }), `/blog/${generated[0].slug}`);
 
     expect(screen.getByRole('heading', { level: 1, name: 'Page not found' })).toBeInTheDocument();
-    expect((await generateMetadata({ params })).robots).toEqual({ index: false });
+    expect(await generateMetadata({ params })).toMatchObject({
+      title: 'Page not found — Anderson Begossi',
+      robots: { index: false },
+    });
   });
 });

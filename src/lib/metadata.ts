@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { type PostScreenPath, postScreen } from './blog/format';
 import type { Post } from './blog/posts';
-import { getDictionary } from './i18n';
+import { type Dictionary, getDictionary } from './i18n';
 import {
   defaultLocale,
   htmlLang,
@@ -12,24 +12,54 @@ import {
 } from './i18n/locale';
 import { siteConfig } from './site-config';
 
-/** Title and description for a locale's root layout — inherited by its pages. */
+/** Document title for a named page. Home leads with the author instead. */
+function pageTitle(name: string): string {
+  return `${name} — ${siteConfig.author}`;
+}
+
+/**
+ * Title and description for one screen, taken from the dictionary the page
+ * already renders. A missing screen is a type error, so a new route cannot
+ * ship with the layout's title.
+ */
+const screenCopy: Record<ScreenPath, (t: Dictionary) => { title: string; description: string }> = {
+  '/': (t) => ({
+    title: `${siteConfig.author} — ${t.home.role}`,
+    description: t.home.bio,
+  }),
+  '/about': (t) => ({ title: pageTitle(t.about.title), description: t.about.p1 }),
+  '/projects': (t) => ({ title: pageTitle(t.projects.title), description: t.projects.subtitle }),
+  '/blog': (t) => ({ title: pageTitle(t.blog.title), description: t.blog.subtitle }),
+  '/contact': (t) => ({ title: pageTitle(t.contact.title), description: t.contact.subtitle }),
+};
+
+/**
+ * Title, description and base URL for a locale's root layout. Pages that don't
+ * set their own inherit the Home screen's.
+ */
 export function localeMetadata(locale: Locale): Metadata {
-  const t = getDictionary(locale);
+  const home = screenCopy['/'](getDictionary(locale));
 
   return {
     metadataBase: new URL(siteConfig.baseUrl),
-    title: `${siteConfig.author} — ${t.home.role}`,
-    description: t.home.bio,
+    title: home.title,
+    description: home.description,
   };
 }
 
 /**
- * Canonical URL and the `hreflang` pair for one screen (ADR 0002). Every page
- * exports this for its own screen path — the layout cannot, since it would then
- * claim the same canonical URL for every page underneath it.
+ * Title, description, canonical URL and the `hreflang` pair for one screen
+ * (ADR 0002). Every page exports this for its own screen path — the layout
+ * cannot, since it would then claim the same canonical URL for every page
+ * underneath it.
  */
 export function screenMetadata(locale: Locale, screen: ScreenPath): Metadata {
-  return { alternates: alternates(screen, locale, locales) };
+  const copy = screenCopy[screen](getDictionary(locale));
+  return {
+    title: copy.title,
+    description: copy.description,
+    alternates: alternates(screen, locale, locales),
+  };
 }
 
 /**
@@ -39,7 +69,7 @@ export function screenMetadata(locale: Locale, screen: ScreenPath): Metadata {
  */
 export function postMetadata(post: Post): Metadata {
   return {
-    title: `${post.title} — ${siteConfig.author}`,
+    title: pageTitle(post.title),
     description: post.excerpt,
     alternates: alternates(postScreen(post.slug), post.locale, post.locales),
   };
@@ -65,4 +95,32 @@ function alternates(
 function canonicalUrl(screen: ScreenPath | PostScreenPath, locale: Locale): string {
   const path = localePath(screen, locale);
   return path.endsWith('/') ? path : `${path}/`;
+}
+
+/** Same path as a canonical, resolved against the one base URL (ADR 0005). */
+export function absoluteUrl(screen: ScreenPath | PostScreenPath, locale: Locale): string {
+  return new URL(canonicalUrl(screen, locale), siteConfig.baseUrl).href;
+}
+
+/**
+ * The global 404 has no layout of its own, so it carries the base URL.
+ * Next injects `noindex` for this file. Setting `robots` here as well ships
+ * a second tag.
+ */
+export function notFoundMetadata(locale: Locale): Metadata {
+  const t = getDictionary(locale);
+  return {
+    ...localeMetadata(locale),
+    title: pageTitle(t.notFound.title),
+    description: t.notFound.subtitle,
+  };
+}
+
+/**
+ * The empty-blog placeholder is a real 200 that renders the 404. Next does not
+ * inject `noindex` for it the way it does for `global-not-found`, so this sets
+ * the tag, and it wears the 404 title rather than Home's.
+ */
+export function placeholderArticleMetadata(locale: Locale): Metadata {
+  return { ...notFoundMetadata(locale), robots: { index: false } };
 }

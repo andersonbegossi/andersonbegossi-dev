@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { ArticleScreen, articleParams, findPost } from '@/components/article-screen';
 import { NotFoundScreen } from '@/components/not-found-screen';
-import { postMetadata } from '@/lib/metadata';
+import { placeholderArticleMetadata, postMetadata } from '@/lib/metadata';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -14,7 +14,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = findPost('pt', (await params).slug);
-  return post ? postMetadata(post) : { robots: { index: false } };
+  return post ? postMetadata(post) : placeholderArticleMetadata('pt');
 }
 
 export default async function ArticlePage({ params }: Props) {
