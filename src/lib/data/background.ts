@@ -31,10 +31,10 @@ export const background: Record<Locale, Background> = {
   en: {
     experience: [
       {
-        period: 'Mar 2022 – Present',
+        period: '2022 — now',
         role: 'React Native Mobile Developer',
         company: 'Bamse',
-        location: 'Blumenau, Santa Catarina, Brazil · Remote',
+        location: 'Blumenau, BR (remote)',
         bullets: [
           'Developed and maintained the mobile applications for Dental Cremer, Dental Speed, and Utilidades Clínicas (Henry Schein – NASDAQ: HSIC), serving thousands of users and maintaining a 4.9★ average app store rating by delivering new features, bug fixes, and continuous improvements using React Native.',
           'Developed key application features, including the product details page, voice search, biometric authentication, social authentication, two-factor authentication (2FA), and virtual try-on, following software engineering best practices and integrating with internal APIs and native platform capabilities while focusing on performance, security, and maintainability.',
@@ -46,10 +46,10 @@ export const background: Record<Locale, Background> = {
         ],
       },
       {
-        period: 'Sep 2020 – Feb 2022',
-        role: 'Front-end Developer React/React Native',
+        period: '2020 — 2022',
+        role: 'Front-end Developer (React / React Native)',
         company: 'Softaliza',
-        location: 'Santa Maria, Rio Grande do Sul, Brazil · Remote',
+        location: 'Santa Maria, BR (remote)',
         bullets: [
           'Developed key features for the Ciente Studio event platform, including event microsites, microsite management dashboard, registration flow, and live streaming module, following software engineering best practices with a focus on scalability, performance, and maintainability.',
           'Implemented Zoom integration for the Ciente Studio platform, enabling live event streaming through APIs while ensuring a reliable and stable integration.',
@@ -57,10 +57,10 @@ export const background: Record<Locale, Background> = {
         ],
       },
       {
-        period: 'May 2020 – Aug 2021',
-        role: 'Full-stack Developer React/React Native/Node.js',
-        company: 'Zion Tech Serviços de Desenvolvimento e Consultoria de Sistemas Ltda',
-        location: 'Caxias do Sul, Rio Grande do Sul, Brazil · Remote',
+        period: '2020 — 2021',
+        role: 'Full-stack Developer (React / React Native / Node.js)',
+        company: 'Zion Tech',
+        location: 'Caxias do Sul, BR (remote, part-time)',
         bullets: [
           'Developed the Você + Saúde mobile application using React Native, implementing health monitoring features with a focus on performance, quality, and maintainability.',
           'Developed a backend service using Node.js and AdonisJS, centralizing communication with APIs and implementing secure and scalable integrations.',
@@ -69,10 +69,10 @@ export const background: Record<Locale, Background> = {
         ],
       },
       {
-        period: 'Jul 2017 – Jul 2019',
+        period: '2017 — 2019',
         role: 'Undergraduate Researcher',
-        company: 'UCS - Universidade de Caxias do Sul',
-        location: 'Caxias do Sul, Rio Grande do Sul, Brazil · On-site',
+        company: 'UCS',
+        location: 'Caxias do Sul, BR',
         bullets: [
           'Developed a force measurement system capable of detecting nanonewton-level forces using a quartz piezoelectric sensor and Python scripts, enabling high-precision measurements for experimental applications.',
           'Presented the piezoelectric sensor project at the 27th Young Researchers Conference at the University of Caxias do Sul (UCS), sharing the academic results and their scientific applications.',

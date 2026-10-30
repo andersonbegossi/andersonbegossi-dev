@@ -215,7 +215,7 @@ RESUMES = {
         "experience": [
             (
                 "React Native Mobile Developer — Bamse",
-                "Mar 2022 – Present · Blumenau, Santa Catarina, Brazil · Remote",
+                "March 2022 – Present · Blumenau, SC, Brazil (remote)",
                 [
                     "Developed and maintained the mobile applications for Dental Cremer, Dental Speed, and "
                     "Utilidades Clínicas (Henry Schein – NASDAQ: HSIC), serving thousands of users and maintaining "
@@ -241,7 +241,7 @@ RESUMES = {
             ),
             (
                 "Front-end Developer React/React Native — Softaliza",
-                "Sep 2020 – Feb 2022 · Santa Maria, Rio Grande do Sul, Brazil · Remote",
+                "September 2020 – February 2022 (1 yr 6 mos) · Santa Maria, RS, Brazil (remote)",
                 [
                     "Developed key features for the Ciente Studio event platform, including event microsites, "
                     "microsite management dashboard, registration flow, and live streaming module, following "
@@ -255,9 +255,8 @@ RESUMES = {
                 ],
             ),
             (
-                "Full-stack Developer React/React Native/Node.js — Zion Tech Serviços de Desenvolvimento e "
-                "Consultoria de Sistemas Ltda",
-                "May 2020 – Aug 2021 · Caxias do Sul, Rio Grande do Sul, Brazil · Remote",
+                "Full-stack Developer React/React Native/Node.js — Zion Tech",
+                "May 2020 – August 2021 (1 yr 4 mos) · Caxias do Sul, RS, Brazil (remote, part-time)",
                 [
                     "Developed the Você + Saúde mobile application using React Native, implementing health "
                     "monitoring features with a focus on performance, quality, and maintainability.",
@@ -271,8 +270,8 @@ RESUMES = {
                 ],
             ),
             (
-                "Undergraduate Researcher — UCS - Universidade de Caxias do Sul",
-                "Jul 2017 – Jul 2019 · Caxias do Sul, Rio Grande do Sul, Brazil · On-site",
+                "Undergraduate Researcher — UCS (Universidade de Caxias do Sul)",
+                "July 2017 – July 2019 (2 yrs 1 mo) · Caxias do Sul, RS, Brazil",
                 [
                     "Developed a force measurement system capable of detecting nanonewton-level forces using a "
                     "quartz piezoelectric sensor and Python scripts, enabling high-precision measurements for "

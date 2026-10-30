@@ -30,10 +30,8 @@ describe('About screen', () => {
     expect(
       within(jobs[0]).getByRole('heading', { level: 3, name: 'React Native Mobile Developer' }),
     ).toBeInTheDocument();
-    expect(within(jobs[0]).getByText('Mar 2022 – Present')).toBeInTheDocument();
-    expect(
-      within(jobs[0]).getByText('Bamse · Blumenau, Santa Catarina, Brazil · Remote'),
-    ).toBeInTheDocument();
+    expect(within(jobs[0]).getByText('2022 — now')).toBeInTheDocument();
+    expect(within(jobs[0]).getByText('Bamse · Blumenau, BR (remote)')).toBeInTheDocument();
     expect(within(jobs[0]).getAllByRole('listitem')).toHaveLength(7);
     expect(
       within(jobs[0]).getByText(/maintaining a 4\.9★ average app store rating/),
@@ -41,36 +39,28 @@ describe('About screen', () => {
     expect(
       within(jobs[1]).getByRole('heading', {
         level: 3,
-        name: 'Front-end Developer React/React Native',
+        name: 'Front-end Developer (React / React Native)',
       }),
     ).toBeInTheDocument();
-    expect(within(jobs[1]).getByText('Sep 2020 – Feb 2022')).toBeInTheDocument();
-    expect(
-      within(jobs[1]).getByText('Softaliza · Santa Maria, Rio Grande do Sul, Brazil · Remote'),
-    ).toBeInTheDocument();
+    expect(within(jobs[1]).getByText('2020 — 2022')).toBeInTheDocument();
+    expect(within(jobs[1]).getByText('Softaliza · Santa Maria, BR (remote)')).toBeInTheDocument();
     expect(within(jobs[1]).getAllByRole('listitem')).toHaveLength(3);
     expect(
       within(jobs[2]).getByRole('heading', {
         level: 3,
-        name: 'Full-stack Developer React/React Native/Node.js',
+        name: 'Full-stack Developer (React / React Native / Node.js)',
       }),
     ).toBeInTheDocument();
-    expect(within(jobs[2]).getByText('May 2020 – Aug 2021')).toBeInTheDocument();
+    expect(within(jobs[2]).getByText('2020 — 2021')).toBeInTheDocument();
     expect(
-      within(jobs[2]).getByText(
-        'Zion Tech Serviços de Desenvolvimento e Consultoria de Sistemas Ltda · Caxias do Sul, Rio Grande do Sul, Brazil · Remote',
-      ),
+      within(jobs[2]).getByText('Zion Tech · Caxias do Sul, BR (remote, part-time)'),
     ).toBeInTheDocument();
     expect(within(jobs[2]).getAllByRole('listitem')).toHaveLength(4);
     expect(
       within(jobs[3]).getByRole('heading', { level: 3, name: 'Undergraduate Researcher' }),
     ).toBeInTheDocument();
-    expect(within(jobs[3]).getByText('Jul 2017 – Jul 2019')).toBeInTheDocument();
-    expect(
-      within(jobs[3]).getByText(
-        'UCS - Universidade de Caxias do Sul · Caxias do Sul, Rio Grande do Sul, Brazil · On-site',
-      ),
-    ).toBeInTheDocument();
+    expect(within(jobs[3]).getByText('2017 — 2019')).toBeInTheDocument();
+    expect(within(jobs[3]).getByText('UCS · Caxias do Sul, BR')).toBeInTheDocument();
     expect(within(jobs[3]).getAllByRole('listitem')).toHaveLength(2);
     expect(within(jobs[3]).getByText(/27th Young Researchers Conference/)).toBeInTheDocument();
   });
