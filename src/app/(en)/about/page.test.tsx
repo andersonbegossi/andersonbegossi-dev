@@ -33,6 +33,17 @@ describe('About screen', () => {
     expect(within(jobs[0]).getByText('2022 — now')).toBeInTheDocument();
     expect(within(jobs[0]).getByText('Bamse · Blumenau, BR (remote)')).toBeInTheDocument();
     expect(within(jobs[0]).getAllByRole('listitem')).toHaveLength(7);
+    expect(
+      within(jobs[0]).getByText(/maintaining a 4\.9★ average app store rating/),
+    ).toBeInTheDocument();
+    expect(
+      within(jobs[1]).getByRole('heading', {
+        level: 3,
+        name: 'Front-end Developer (React / React Native)',
+      }),
+    ).toBeInTheDocument();
+    expect(within(jobs[1]).getByText('2020 — 2022')).toBeInTheDocument();
+    expect(within(jobs[1]).getByText('Softaliza · Santa Maria, BR (remote)')).toBeInTheDocument();
     expect(within(jobs[1]).getAllByRole('listitem')).toHaveLength(3);
     expect(
       within(jobs[2]).getByRole('heading', {
@@ -40,9 +51,18 @@ describe('About screen', () => {
         name: 'Full-stack Developer (React / React Native / Node.js)',
       }),
     ).toBeInTheDocument();
+    expect(within(jobs[2]).getByText('2020 — 2021')).toBeInTheDocument();
+    expect(
+      within(jobs[2]).getByText('Zion Tech · Caxias do Sul, BR (remote, part-time)'),
+    ).toBeInTheDocument();
     expect(within(jobs[2]).getAllByRole('listitem')).toHaveLength(4);
+    expect(
+      within(jobs[3]).getByRole('heading', { level: 3, name: 'Undergraduate Researcher' }),
+    ).toBeInTheDocument();
+    expect(within(jobs[3]).getByText('2017 — 2019')).toBeInTheDocument();
     expect(within(jobs[3]).getByText('UCS · Caxias do Sul, BR')).toBeInTheDocument();
     expect(within(jobs[3]).getAllByRole('listitem')).toHaveLength(2);
+    expect(within(jobs[3]).getByText(/27th Young Researchers Conference/)).toBeInTheDocument();
   });
 
   it('groups the skills into six chip rows', () => {

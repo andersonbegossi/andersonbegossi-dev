@@ -21,6 +21,8 @@ from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (
     HRFlowable,
     KeepTogether,
@@ -107,7 +109,7 @@ RESUMES = {
                 "Desenvolvedor Mobile React Native — Bamse",
                 "Março de 2022 – Atual · Blumenau, SC (remoto)",
                 [
-                    "Desenvolvo e mantenho os aplicativos mobile da Dental Cremer, Dental Speed e Utilidades "
+                    "Desenvolvi e mantive os aplicativos mobile da Dental Cremer, Dental Speed e Utilidades "
                     "Clínicas (Henry Schein — NASDAQ:HSIC) com React Native, utilizados por milhares de usuários e "
                     "com avaliação média de <b>4,9/5 estrelas</b> na App Store e no Google Play.",
                     "Desenvolvi funcionalidades estratégicas como tela de detalhes do produto, busca por voz, "
@@ -215,58 +217,68 @@ RESUMES = {
                 "React Native Mobile Developer — Bamse",
                 "March 2022 – Present · Blumenau, SC, Brazil (remote)",
                 [
-                    "Build and maintain the Dental Cremer, Dental Speed and Utilidades Clínicas mobile apps "
-                    "(Henry Schein — NASDAQ:HSIC) with React Native, used by thousands of users and rated "
-                    "<b>4.9/5 stars</b> on the App Store and Google Play.",
-                    "Built strategic features such as the product detail screen, voice search, biometric, social "
-                    "and two-factor (2FA) authentication and <b>virtual try-on</b>, integrating internal APIs and "
-                    "native features with a focus on performance, security and maintainability.",
-                    "Implemented <b>Pix payments in checkout</b>, integrating the app with internal APIs with a "
-                    "focus on security, reliability and an optimized purchase flow.",
-                    "Implemented the <b>Design System</b> shared by the three apps with Styled Components, driving "
-                    "component reuse, visual consistency and productivity.",
-                    "Improved the apps' <b>accessibility</b> with screen-reader support and best practices, making "
-                    "navigation more inclusive.",
-                    "Cut development time by <b>~30%</b> and increased code reuse across the apps by creating "
-                    "shared private libraries (components, themes and business rules) published to NPM.",
-                    "Helped migrate from a multi-repo architecture to a <b>monorepo</b>, reducing setup, "
-                    "development and maintenance time, centralizing shared libraries and simplifying dependency "
-                    "management.",
+                    "Developed and maintained the mobile applications for Dental Cremer, Dental Speed, and "
+                    "Utilidades Clínicas (Henry Schein – NASDAQ: HSIC), serving thousands of users and maintaining "
+                    "a 4.9★ average app store rating by delivering new features, bug fixes, and continuous "
+                    "improvements using React Native.",
+                    "Developed key application features, including the product details page, voice search, biometric "
+                    "authentication, social authentication, two-factor authentication (2FA), and virtual try-on, "
+                    "following software engineering best practices and integrating with internal APIs and native "
+                    "platform capabilities while focusing on performance, security, and maintainability.",
+                    "Implemented the Pix payment flow in the checkout process, integrating the mobile application "
+                    "with internal APIs to deliver a secure, reliable, and optimized purchasing experience.",
+                    "Implemented the shared Design System across all three applications using Styled Components, "
+                    "increasing component reusability, ensuring UI consistency, and improving development "
+                    "productivity.",
+                    "Improved the accessibility of the mobile applications by implementing screen reader support and "
+                    "accessibility best practices to provide a more inclusive user experience.",
+                    "Reduced development time by approximately 30% and increased code reuse across applications by "
+                    "creating shared private libraries for components, themes, and business logic.",
+                    "Contributed to the migration of the applications' architecture to a monorepo, significantly "
+                    "reducing setup, development, and maintenance time by centralizing shared libraries, "
+                    "standardizing the project structure, and simplifying dependency management.",
                 ],
             ),
             (
                 "Front-end Developer React/React Native — Softaliza",
                 "September 2020 – February 2022 (1 yr 6 mos) · Santa Maria, RS, Brazil (remote)",
                 [
-                    "Built strategic features for the Ciente Studio events platform: event hotsites, configuration "
-                    "panel, registration flow and streaming module, focused on scalability and performance.",
-                    "Implemented the <b>Zoom integration</b> through its APIs, enabling reliable and stable live "
-                    "streams.",
-                    "Modernized and maintained the Camobi Segura app, upgrading dependencies, shipping fixes and "
-                    "improving the app's stability.",
+                    "Developed key features for the Ciente Studio event platform, including event microsites, "
+                    "microsite management dashboard, registration flow, and live streaming module, following "
+                    "software engineering best practices with a focus on scalability, performance, and "
+                    "maintainability.",
+                    "Implemented Zoom integration for the Ciente Studio platform, enabling live event streaming "
+                    "through APIs while ensuring a reliable and stable integration.",
+                    "Performed technology upgrades and maintenance for the Camobi Segura mobile application, "
+                    "modernizing dependencies, implementing bug fixes, and improving application stability and "
+                    "reliability.",
                 ],
             ),
             (
                 "Full-stack Developer React/React Native/Node.js — Zion Tech",
                 "May 2020 – August 2021 (1 yr 4 mos) · Caxias do Sul, RS, Brazil (remote, part-time)",
                 [
-                    "Built the <b>Você + Saúde</b> mobile app in React Native, with health-tracking features "
-                    "focused on performance and quality.",
-                    "Created a Node.js and AdonisJS backend service, centralizing API communication with secure, "
-                    "scalable integrations.",
-                    "Built a responsive Next.js landing page applying performance and SEO best practices to support "
-                    "user acquisition.",
-                    "Created the <b>Stewart Acid-Base</b> app, a clinical decision-support tool for healthcare "
-                    "professionals with reliable calculations and an intuitive interface.",
+                    "Developed the Você + Saúde mobile application using React Native, implementing health "
+                    "monitoring features with a focus on performance, quality, and maintainability.",
+                    "Developed a backend service using Node.js and AdonisJS, centralizing communication with APIs "
+                    "and implementing secure and scalable integrations.",
+                    "Developed a responsive landing page using Next.js, applying best practices for performance, "
+                    "SEO, and responsiveness to support user acquisition.",
+                    "Developed the Stewart Acid-Base mobile application, creating a clinical decision support tool "
+                    "for healthcare professionals by implementing reliable clinical calculations and an intuitive "
+                    "user interface.",
                 ],
             ),
             (
                 "Undergraduate Researcher — UCS (Universidade de Caxias do Sul)",
                 "July 2017 – July 2019 (2 yrs 1 mo) · Caxias do Sul, RS, Brazil",
                 [
-                    "Built a nanonewton-scale force measurement system with a quartz piezoelectric sensor and "
-                    "Python scripts, enabling high-precision measurements.",
-                    "Presented the project at the XXVII UCS Young Researchers Meeting.",
+                    "Developed a force measurement system capable of detecting nanonewton-level forces using a "
+                    "quartz piezoelectric sensor and Python scripts, enabling high-precision measurements for "
+                    "experimental applications.",
+                    "Presented the piezoelectric sensor project at the 27th Young Researchers Conference at the "
+                    "University of Caxias do Sul (UCS), sharing the academic results and their scientific "
+                    "applications.",
                 ],
             ),
         ],
@@ -291,8 +303,37 @@ def heading(text: str) -> list:
     ]
 
 
+_STAR_FONT_READY = False
+
+
+def _ensure_star_font() -> None:
+    """Helvetica has no ★. Register a face that does, the first time a bullet needs one."""
+    global _STAR_FONT_READY
+    if _STAR_FONT_READY:
+        return
+    candidates = [
+        Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"),
+        Path("/usr/share/fonts/dejavu/DejaVuSans.ttf"),
+        Path("/usr/share/fonts/truetype/dejavu-sans-fonts/DejaVuSans.ttf"),
+        Path("/Library/Fonts/DejaVuSans.ttf"),
+        Path.home() / "Library/Fonts/DejaVuSans.ttf",
+    ]
+    for path in candidates:
+        if path.is_file():
+            pdfmetrics.registerFont(TTFont("DejaVuSans", str(path)))
+            _STAR_FONT_READY = True
+            return
+    raise SystemExit("DejaVu Sans is required to draw ★ in the resume PDF")
+
+
 def bullets(items: list[str]) -> list:
-    return [Paragraph(item, bullet, bulletText="•") for item in items]
+    rendered = []
+    for item in items:
+        if "★" in item:
+            _ensure_star_font()
+            item = item.replace("★", f'<font name="DejaVuSans" size="{bullet.fontSize:g}">★</font>')
+        rendered.append(Paragraph(item, bullet, bulletText="•"))
+    return rendered
 
 
 def build(resume: dict) -> Path:
