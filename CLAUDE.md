@@ -18,6 +18,7 @@ yarn test:watch
 yarn check       # biome lint + format check
 yarn check:fix   # biome autofix (what lint-staged runs on commit)
 uv run scripts/build-resume.py   # rebuild both resume PDFs in public/ (en + pt)
+uv run scripts/build-favicon.py  # rebuild src/app icon.png, apple-icon.png, and favicon.ico
 ```
 
 Single test file / single case:

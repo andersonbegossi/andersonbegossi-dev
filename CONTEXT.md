@@ -32,7 +32,9 @@ and clients: SEO and shareable URLs are requirements, not nice-to-haves.
 - Domain: **`andersonbegossi.dev`** (not the design's `begossi.dev`), served from Vercel.
   The canonical base URL is a single site-config constant.
 - Assets pulled from the design project are served from `public/`:
-  `hero-photo.webp`. The resume PDFs are built by `scripts/build-resume.py`, one per Locale:
+  `hero-photo.webp`. The favicon is a circular crop of that photo, built by
+  `scripts/build-favicon.py` into `src/app/` (`icon.png`, `apple-icon.png`,
+  `favicon.ico`). The resume PDFs are built by `scripts/build-resume.py`, one per Locale:
   `Anderson-Begossi-Resume.pdf` (en) and `Anderson-Begossi-Curriculo.pdf` (pt).
 
 ## Link policy
