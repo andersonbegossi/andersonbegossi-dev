@@ -197,16 +197,16 @@ describe('404 metadata', () => {
 describe('favicon', () => {
   const appDir = join(process.cwd(), 'src/app');
 
-  it('publishes a circular icon and an opaque apple touch icon', () => {
+  it('publishes a circular icon and a transparent apple touch icon', () => {
     const icon = decodePng(readFileSync(join(appDir, 'icon.png')));
     expect(icon).toMatchObject({ width: 32, height: 32, channels: 4 });
     expect(icon.pixel(0, 0)[3]).toBe(0);
     expect(icon.pixel(16, 16)[3]).toBe(255);
 
     const apple = decodePng(readFileSync(join(appDir, 'apple-icon.png')));
-    expect(apple).toMatchObject({ width: 180, height: 180, channels: 3 });
-    expect(apple.pixel(0, 0)).toEqual([0xfa, 0xfa, 0xf8]);
-    expect(apple.pixel(90, 90)).not.toEqual([0xfa, 0xfa, 0xf8]);
+    expect(apple).toMatchObject({ width: 180, height: 180, channels: 4 });
+    expect(apple.pixel(0, 0)[3]).toBe(0);
+    expect(apple.pixel(90, 90)[3]).toBe(255);
 
     const frames = decodeIco(readFileSync(join(appDir, 'favicon.ico')));
     expect(frames.map((frame) => frame.width)).toEqual([16, 32, 48]);

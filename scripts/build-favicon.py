@@ -11,8 +11,8 @@ Writes the App Router metadata files Next turns into <link rel="icon"> and
 
     src/app/icon.png        32×32, circle on transparency
     src/app/favicon.ico     16, 32 and 48, same circle
-    src/app/apple-icon.png  180×180, circle on #fafaf8 (opaque; iOS paints
-                            transparency black)
+    src/app/apple-icon.png  180×180, same circle. iOS home-screen
+                            bookmarks paint the transparent corners black.
 
 They live in src/app/, not a route group and not public/. favicon.ico is only
 read at the top of app/, and a file there is the one set of icons both root
@@ -32,10 +32,6 @@ from PIL import Image, ImageDraw
 ROOT = Path(__file__).resolve().parent.parent
 HERO = ROOT / "public" / "hero-photo.webp"
 APP = ROOT / "src" / "app"
-
-# Light-theme page background (--bg in src/app/globals.css). iOS fills a
-# transparent apple-touch-icon with black, so the circle sits on this instead.
-LIGHT_BG = (0xFA, 0xFA, 0xF8, 255)
 
 ICON_PX = 32
 ICO_PX = (16, 32, 48)
@@ -73,12 +69,6 @@ def circular(source: Image.Image, size: int) -> Image.Image:
     return resized
 
 
-def on_light(source: Image.Image, size: int) -> Image.Image:
-    canvas = Image.new("RGBA", (size, size), LIGHT_BG)
-    canvas.alpha_composite(circular(source, size))
-    return canvas.convert("RGB")
-
-
 def write_ico(images: list[Image.Image], path: Path) -> None:
     # Pillow skips any size larger than the image `.save` is called on, so the
     # largest frame has to be the primary one. PNG frames keep the alpha; the
@@ -98,7 +88,7 @@ def main() -> None:
     icon = circular(source, ICON_PX)
     icon.save(APP / "icon.png", format="PNG", optimize=True)
     write_ico([circular(source, size) for size in ICO_PX], APP / "favicon.ico")
-    on_light(source, APPLE_PX).save(APP / "apple-icon.png", format="PNG", optimize=True)
+    circular(source, APPLE_PX).save(APP / "apple-icon.png", format="PNG", optimize=True)
     for name in ("icon.png", "favicon.ico", "apple-icon.png"):
         print(f"wrote {APP / name}")
 
