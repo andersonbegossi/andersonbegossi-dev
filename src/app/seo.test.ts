@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { inflateSync } from 'node:zlib';
 import type { Metadata } from 'next';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -184,3 +187,148 @@ describe('404 metadata', () => {
     expect(notFound.robots).toBeUndefined();
   });
 });
+
+/**
+ * App Router icon files at the root of `src/app`. Next emits
+ * `<link rel="icon">` and `<link rel="apple-touch-icon">` from them for both
+ * root layouts and the global 404. The build is what prints the tags — this
+ * checks the images they point at.
+ */
+describe('favicon', () => {
+  const appDir = join(process.cwd(), 'src/app');
+
+  it('publishes a circular icon and an opaque apple touch icon', () => {
+    const icon = decodePng(readFileSync(join(appDir, 'icon.png')));
+    expect(icon).toMatchObject({ width: 32, height: 32, channels: 4 });
+    expect(icon.pixel(0, 0)[3]).toBe(0);
+    expect(icon.pixel(16, 16)[3]).toBe(255);
+
+    const apple = decodePng(readFileSync(join(appDir, 'apple-icon.png')));
+    expect(apple).toMatchObject({ width: 180, height: 180, channels: 3 });
+    expect(apple.pixel(0, 0)).toEqual([0xfa, 0xfa, 0xf8]);
+    expect(apple.pixel(90, 90)).not.toEqual([0xfa, 0xfa, 0xf8]);
+
+    const frames = decodeIco(readFileSync(join(appDir, 'favicon.ico')));
+    expect(frames.map((frame) => frame.width)).toEqual([16, 32, 48]);
+    for (const frame of frames) {
+      expect(frame.height).toBe(frame.width);
+      expect(frame.channels).toBe(4);
+      expect(frame.pixel(0, 0)[3]).toBe(0);
+      expect(frame.pixel(frame.width >> 1, frame.height >> 1)[3]).toBe(255);
+    }
+  });
+});
+
+type Raster = {
+  width: number;
+  height: number;
+  channels: 3 | 4;
+  pixel: (x: number, y: number) => number[];
+};
+
+const PNG_SIGNATURE = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
+
+/** Enough of a PNG to read the size, the colour type, and one pixel. */
+function decodePng(bytes: Buffer): Raster {
+  if (!bytes.subarray(0, 8).equals(PNG_SIGNATURE)) {
+    throw new Error('not a png');
+  }
+
+  let width = 0;
+  let height = 0;
+  let channels: 3 | 4 = 3;
+  const idat: Buffer[] = [];
+  let offset = 8;
+
+  while (offset < bytes.length) {
+    const length = bytes.readUInt32BE(offset);
+    const type = bytes.toString('ascii', offset + 4, offset + 8);
+    const data = bytes.subarray(offset + 8, offset + 8 + length);
+    offset += 12 + length;
+
+    if (type === 'IHDR') {
+      width = data.readUInt32BE(0);
+      height = data.readUInt32BE(4);
+      const bitDepth = data[8];
+      const colorType = data[9];
+      const interlace = data[12];
+      if (bitDepth !== 8 || interlace !== 0 || (colorType !== 2 && colorType !== 6)) {
+        throw new Error(`unsupported png ${bitDepth} ${colorType} ${interlace}`);
+      }
+      channels = colorType === 6 ? 4 : 3;
+    } else if (type === 'IDAT') {
+      idat.push(data);
+    } else if (type === 'IEND') {
+      break;
+    }
+  }
+
+  const stride = width * channels;
+  const raw = inflateSync(Buffer.concat(idat));
+  const pixels = Buffer.alloc(height * stride);
+  let source = 0;
+  let previous = Buffer.alloc(stride);
+
+  for (let y = 0; y < height; y++) {
+    const filter = raw[source++];
+    const row = Buffer.alloc(stride);
+    for (let index = 0; index < stride; index++) {
+      const left = index >= channels ? row[index - channels] : 0;
+      const up = previous[index];
+      const upLeft = index >= channels ? previous[index - channels] : 0;
+      row[index] = unfilter(filter, raw[source++], left, up, upLeft);
+    }
+    row.copy(pixels, y * stride);
+    previous = row;
+  }
+
+  return {
+    width,
+    height,
+    channels,
+    pixel(x, y) {
+      const start = (y * width + x) * channels;
+      return [...pixels.subarray(start, start + channels)];
+    },
+  };
+}
+
+function unfilter(filter: number, value: number, left: number, up: number, upLeft: number): number {
+  if (filter === 0) return value;
+  if (filter === 1) return (value + left) & 255;
+  if (filter === 2) return (value + up) & 255;
+  if (filter === 3) return (value + Math.floor((left + up) / 2)) & 255;
+  if (filter === 4) return (value + paeth(left, up, upLeft)) & 255;
+  throw new Error(`unsupported png filter ${filter}`);
+}
+
+function paeth(left: number, up: number, upLeft: number): number {
+  const estimate = left + up - upLeft;
+  const distanceLeft = Math.abs(estimate - left);
+  const distanceUp = Math.abs(estimate - up);
+  const distanceUpLeft = Math.abs(estimate - upLeft);
+  if (distanceLeft <= distanceUp && distanceLeft <= distanceUpLeft) return left;
+  if (distanceUp <= distanceUpLeft) return up;
+  return upLeft;
+}
+
+/** Vista-style ICO: a directory of PNG frames, 16 then 32 then 48. */
+function decodeIco(bytes: Buffer): Raster[] {
+  if (bytes.readUInt16LE(0) !== 0 || bytes.readUInt16LE(2) !== 1) {
+    throw new Error('not an ico');
+  }
+  const count = bytes.readUInt16LE(4);
+  const frames: Raster[] = [];
+  for (let index = 0; index < count; index++) {
+    const entry = 6 + index * 16;
+    const width = bytes[entry] || 256;
+    const height = bytes[entry + 1] || 256;
+    const size = bytes.readUInt32LE(entry + 8);
+    const offset = bytes.readUInt32LE(entry + 12);
+    const frame = decodePng(bytes.subarray(offset, offset + size));
+    expect(frame.width).toBe(width);
+    expect(frame.height).toBe(height);
+    frames.push(frame);
+  }
+  return frames;
+}
