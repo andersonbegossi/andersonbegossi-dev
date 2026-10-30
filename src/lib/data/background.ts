@@ -128,7 +128,7 @@ export const background: Record<Locale, Background> = {
         company: 'Bamse',
         location: 'Blumenau, SC (remoto)',
         bullets: [
-          'Desenvolvo e mantenho os aplicativos mobile da Dental Cremer, Dental Speed e Utilidades Clínicas (Henry Schein — NASDAQ:HSIC) com React Native, utilizados por milhares de usuários e com avaliação média de 4,9★ nas lojas.',
+          'Desenvolvi e mantive os aplicativos mobile da Dental Cremer, Dental Speed e Utilidades Clínicas (Henry Schein — NASDAQ:HSIC) com React Native, utilizados por milhares de usuários e com avaliação média de 4,9★ nas lojas.',
           'Desenvolvi funcionalidades estratégicas como tela de detalhes do produto, busca por voz, autenticação biométrica, social e em dois fatores (2FA) e provador virtual, integrando APIs internas e recursos nativos com foco em desempenho, segurança e manutenibilidade.',
           'Implementei o fluxo de pagamento via Pix no checkout, integrando o aplicativo às APIs internas em um fluxo seguro, confiável e otimizado para o processo de compra.',
           'Implementei o Design System compartilhado entre os três aplicativos com Styled Components, promovendo reutilização de componentes, consistência visual e maior produtividade.',

@@ -109,7 +109,7 @@ RESUMES = {
                 "Desenvolvedor Mobile React Native — Bamse",
                 "Março de 2022 – Atual · Blumenau, SC (remoto)",
                 [
-                    "Desenvolvo e mantenho os aplicativos mobile da Dental Cremer, Dental Speed e Utilidades "
+                    "Desenvolvi e mantive os aplicativos mobile da Dental Cremer, Dental Speed e Utilidades "
                     "Clínicas (Henry Schein — NASDAQ:HSIC) com React Native, utilizados por milhares de usuários e "
                     "com avaliação média de <b>4,9/5 estrelas</b> na App Store e no Google Play.",
                     "Desenvolvi funcionalidades estratégicas como tela de detalhes do produto, busca por voz, "
