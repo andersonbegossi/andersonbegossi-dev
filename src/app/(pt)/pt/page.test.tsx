@@ -50,9 +50,14 @@ describe('Portuguese Home screen', () => {
     );
   });
 
-  it('leaves out the writing section while no posts are published', () => {
+  it('previews the latest post in the writing section', () => {
     renderRoute(<HomePage />, PT_HOME);
 
-    expect(screen.queryByRole('region', { name: 'Artigos' })).not.toBeInTheDocument();
+    const writing = screen.getByRole('region', { name: 'Artigos' });
+    expect(
+      within(writing).getByRole('link', {
+        name: /Como configurar diferentes ambientes em apps React Native/,
+      }),
+    ).toHaveAttribute('href', '/pt/blog/react-native-environments');
   });
 });

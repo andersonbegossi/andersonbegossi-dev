@@ -43,6 +43,33 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  /* Inherited by prose. A fenced block opts back out so its lines scroll. */
+  overflow-wrap: anywhere;
+}
+
+/* A screenshot or a long line would otherwise widen the column. */
+.body > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.body h3 {
+  margin: 22px 0 2px;
+  font-size: 16.5px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.body blockquote {
+  margin: 10px 0;
+  padding: 2px 0 2px 16px;
+  border-left: 2px solid var(--border);
 }
 
 .tags {

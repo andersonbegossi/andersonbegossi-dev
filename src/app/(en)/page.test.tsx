@@ -69,9 +69,14 @@ describe('Home screen', () => {
     );
   });
 
-  it('leaves out the writing section while no posts are published', () => {
+  it('previews the latest post in the writing section', () => {
     renderRoute(<HomePage />);
 
-    expect(screen.queryByRole('region', { name: 'Writing' })).not.toBeInTheDocument();
+    const writing = screen.getByRole('region', { name: 'Writing' });
+    expect(
+      within(writing).getByRole('link', {
+        name: /How to configure different environments in React Native apps/,
+      }),
+    ).toHaveAttribute('href', '/blog/react-native-environments');
   });
 });
