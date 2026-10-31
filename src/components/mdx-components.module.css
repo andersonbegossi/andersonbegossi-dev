@@ -10,15 +10,20 @@
   font-size: 15.5px;
   line-height: 1.8;
   text-wrap: pretty;
+  /* Bare URLs and other unbroken tokens would otherwise widen the page. */
+  overflow-wrap: anywhere;
 }
 
 .codeBlock {
   margin: 14px 0;
   padding: 18px 20px;
+  max-width: 100%;
+  min-width: 0;
   background: var(--code);
   border: 1px solid var(--border);
   border-radius: 10px;
   overflow-x: auto;
+  overflow-wrap: normal;
   font-family: var(--font-mono);
   font-size: 12.5px;
   line-height: 1.7;
@@ -34,6 +39,7 @@
   border-radius: 5px;
   font-family: var(--font-mono);
   font-size: 0.85em;
+  overflow-wrap: anywhere;
 }
 
 /* Inside a code block the `pre` already draws the box and sets the type. */
@@ -43,4 +49,6 @@
   border: none;
   border-radius: 0;
   font-size: inherit;
+  overflow-wrap: normal;
+  white-space: inherit;
 }
