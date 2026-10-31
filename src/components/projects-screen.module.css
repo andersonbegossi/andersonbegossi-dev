@@ -41,24 +41,16 @@
   transform: translateY(-2px);
 }
 
-/* Stands in for the design's image slot until real screenshots exist. */
-.placeholder {
+/* The design's 16:9 image slot. The file is already 16:9; cover + top keeps
+   the hero in frame if a later screenshot is taller. */
+.image {
+  display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: cover;
+  object-position: top;
   border-bottom: 1px solid var(--border);
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      transparent 0 10px,
-      color-mix(in srgb, var(--border) 55%, transparent) 10px 11px
-    ),
-    var(--code);
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  color: var(--faint);
 }
 
 .body {

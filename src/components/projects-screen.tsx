@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { projects } from '@/lib/data/projects';
 import { getDictionary } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n/locale';
@@ -20,9 +21,17 @@ export function ProjectsScreen({ locale }: { locale: Locale }) {
           const headingId = `project-${project.slug}`;
           return (
             <article key={project.slug} aria-labelledby={headingId} className={styles.card}>
-              <div aria-hidden="true" className={styles.placeholder}>
-                {project.placeholder[locale]}
-              </div>
+              {project.image ? (
+                <Image
+                  src={project.image.src}
+                  alt={project.image.alt[locale]}
+                  width={project.image.width}
+                  height={project.image.height}
+                  // The card sits under the title, above the fold.
+                  loading="eager"
+                  className={styles.image}
+                />
+              ) : null}
               <div className={styles.body}>
                 <h2 id={headingId} className={styles.name}>
                   {project.name}
