@@ -42,7 +42,7 @@
 }
 
 /* The design's 16:9 image slot. The file is already 16:9; cover + top keeps
-   the hero in frame if a later screenshot is taller. */
+   the top of a taller image in frame. */
 .image {
   display: block;
   width: 100%;

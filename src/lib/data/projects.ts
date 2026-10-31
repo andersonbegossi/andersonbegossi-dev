@@ -8,7 +8,7 @@ export type Project = {
   desc: Record<Locale, string>;
   tech: readonly string[];
   /**
-   * Screenshot for the card's 16:9 slot. Omitted when the project has none yet.
+   * Image for the card's 16:9 slot. Omitted when the project has none yet.
    * `width` and `height` are the file's intrinsic pixels, so the slot can reserve
    * its space before the image loads.
    */
@@ -45,8 +45,8 @@ export const projects: readonly Project[] = [
       width: 1280,
       height: 720,
       alt: {
-        en: 'Home page of andersonbegossi.dev',
-        pt: 'Página inicial do andersonbegossi.dev',
+        en: 'ab. mark',
+        pt: 'Marca ab.',
       },
     },
     github: siteConfig.repo,

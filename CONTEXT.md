@@ -18,7 +18,7 @@ and clients: SEO and shareable URLs are requirements, not nice-to-haves.
 - **Post** — a blog article authored as MDX, one file per locale:
   `content/blog/<slug>/{en,pt}.mdx`. Frontmatter: `title`, `excerpt`, `date`,
   `category`, `tags`, `minutes`, `featured`.
-- **Project card** — an entry on the Projects screen. A card shows a screenshot
+- **Project card** — an entry on the Projects screen. A card shows an image
   when the project has one, and omits GitHub/Live buttons for repositories that
   are not public (see Link policy).
 - **Accent** — the single brand color, red `#B91C1C` (`--accent-base`), used via the

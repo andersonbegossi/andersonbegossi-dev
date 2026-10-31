@@ -15,15 +15,11 @@ describe('Portuguese Projects screen', () => {
     expect(
       within(site).getByText(/Este site — portfólio e blog técnico bilíngue/),
     ).toBeInTheDocument();
-    const shot = within(site).getByRole('img', {
-      name: 'Página inicial do andersonbegossi.dev',
-    });
+    const shot = within(site).getByRole('img', { name: 'Marca ab.' });
     expect(shot.getAttribute('src')).toContain('andersonbegossi-dev.webp');
     expect(shot).toHaveAttribute('width', '1280');
     expect(shot).toHaveAttribute('height', '720');
-    expect(
-      screen.queryByRole('img', { name: 'Home page of andersonbegossi.dev' }),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByRole('img', { name: 'ab. mark' })).not.toBeInTheDocument();
     expect(screen.queryByText('screenshot do site')).not.toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Projetos' })).toHaveAttribute('aria-current', 'page');
   });
