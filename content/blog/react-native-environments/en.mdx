@@ -1,0 +1,352 @@
+---
+title: "How to configure different environments in React Native apps"
+excerpt: "In React Native projects, it is common to work with different environments — such as development, staging, and production."
+date: 2025-04-21
+category: "React Native"
+tags: [reactnative, mobile, ios, android]
+minutes: 10
+featured: false
+---
+
+In React Native projects, it is common to work with different environments — such as development, staging, and production. Each of these environments can have distinct needs — such as a different app name, a specific icon, or its own environment variables (such as API URLs or keys for external services).
+
+Configuring build variants makes it possible to isolate these contexts, which makes testing, distribution, and organizing the project easier. In this article, I explain how to configure build variants on Android and on iOS, set an icon, an app name, and other settings specific to each variant, and how to integrate the [react-native-config](https://github.com/lugg/react-native-config) library. To demonstrate the setup in practice, I created a sample React Native app that can be found on [GitHub](https://github.com/andersonbegossi/build-variants), and I shared some of its code snippets throughout the text. The final result of the app and its different variants can be seen below:
+
+![BuildVariants](/images/blog/react-native-environments/build-variants.png)
+
+
+## Android
+
+### Build variants
+
+On Android, what we need to do is configure different *build variants*. Each *build variant* has a specific set of settings, code, and resources configured in the *build types* and *product flavors.* Although you don't configure a *build variant* directly, you do it indirectly by configuring *build types* and *product flavors.*
+
+For example, a *product flavor* called `staging` can use a particular API URL, while the *build type* `release` applies different signing settings. The *build variant* that combines the two will be called `stagingRelease`, and it will include the combination of settings defined in the `staging` *product flavor* and the `release` *build type*.
+
+Reference: https://developer.android.com/build/build-variants
+
+### Build types
+
+You can configure different *build types* inside the `android` block in the `android/app/build.gradle` file.
+
+When you create a React Native project, the `debug` and `release` *build types* already come configured by default, as the code snippet below shows:
+
+```jsx
+android {
+    // ...
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            // Caution! In production, you need to generate your own keystore file.
+            // see https://reactnative.dev/docs/signed-apk-android.
+            signingConfig signingConfigs.release
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+    // ...
+}
+```
+
+Reference: https://developer.android.com/build/build-variants#build-types
+
+### Product flavors
+
+Configuring *product flavors* is similar to configuring *build types,* and it is also done in the `android/app/build.gradle` file. Add your *product flavors* to the `productFlavors` block and include the settings you want. *Product flavors* accept the same properties as `defaultConfig`. You can put the base settings of every product flavor in the `defaultConfig` block, and each *flavor* can change any of those default settings, for example the `applicationId`.
+
+In the sample app, I configured the `development`, `staging`, and `production` *product flavors*. For the `development` and `staging` *product flavors*, I added the `applicationIdSuffix` setting, to add a specific suffix to the app's `applicationId`, and `versionNameSuffix`, to add a specific suffix to the app's `versionName`. The code snippet where this was done is shown below:
+
+```jsx
+// ...
+
+android {
+    // ...
+    defaultConfig {
+        applicationId "com.buildvariants"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        resValue "string", "build_config_package", "com.buildvariants"
+    }
+    // ...
+    flavorDimensions "version"
+    productFlavors {
+        development {
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+        }
+        staging {
+            applicationIdSuffix ".staging"
+            versionNameSuffix "-staging"
+        }
+        production {
+
+        }
+    }
+    // ...
+}
+```
+
+Reference: https://developer.android.com/build/build-variants#product-flavors
+
+### Signing configuration
+
+For you to be able to build the app's `release` build type, you need to define the signing configuration. The first step is to [generate an upload key and a keystore](https://developer.android.com/studio/publish/app-signing#generate-key).
+
+Once you have your *upload key* and *keystore*, create a file called `keystore.properties`, inside the android folder, with the signing information you generated, as in the example below:
+
+```jsx
+storeFile=keystore.jks
+keyAlias=keystore
+storePassword=12345678
+keyPassword=12345678
+```
+
+After that, in the `android/app/build.gradle` file, load that file's information before the `android` block and reference it in the `signinConfigs` block:
+
+```jsx
+// ...
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+def keystoreProperties = new Properties()
+
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+android {
+    // ...
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        release {
+            storeFile file(keystoreProperties['storeFile'])
+            keyAlias keystoreProperties['keyAlias']
+            storePassword keystoreProperties['storePassword']
+            keyPassword keystoreProperties['keyPassword']
+        }
+    }
+    // ...
+}
+```
+
+> ⚠️ **Important:** do not add the `keystore.properties` file or your *keystore* to Git. Make sure to add them to `.gitignore`.
+
+Reference: https://developer.android.com/build/build-variants#signing
+
+### App name
+
+To configure a specific app name for each *product flavor*, you need to create a folder named after the *product flavor* inside the android/app/src folder. Inside it, create a folder called "res", and, inside that, one called "values". Inside the "values" folder, add an xml file called "strings" with the desired app name inside a `string` tag with the `name="app_name"` property. In the sample app, the name "DevBuildVariants" was set for the `development` *product flavor*, and "StagingBuildVariants" for `staging`. For the `production` *product flavor*, the name "BuildVariants" was kept, which can be found in the "strings" file of the "main" folder. If the *product flavor* does not override the app name, the one from the "main" folder is used. In the *screenshot* below, the "strings" file with the app name of the `development` *flavor* from the sample app is shown:
+
+![strings.xml](/images/blog/react-native-environments/strings-xml.png)
+
+### App icon
+
+To configure a specific icon for each *product flavor*, add a new **Image Asset** named "ic_launcher" in the "res" folder of each *product flavor*. For the `production` *product flavor* icon, add a new **Image Asset** named "ic_launcher" in the "res" folder inside the "main" folder. The app icon in the "res" folder of the "main" folder is used as the default when the *product flavor* does not have a specific icon.
+
+## iOS
+
+### Build configurations
+
+*Build configurations* define how Xcode should compile the project depending on the environment or purpose of the build. Each configuration represents a set of rules and specific values used during compilation, such as compiler flags, environment variables, optimizations, and configuration files. By default, Xcode creates two configurations: `Debug` and `Release`.
+
+You can create additional configurations, such as `Staging`, `Production`, `DebugStaging`, etc., to have more control over different environments.
+
+These configurations are often combined with *schemes*, which allows, for example, the same source code to be compiled with different API endpoints, credentials, or build keys.
+
+In addition, each *build configuration* can be associated with an `.xcconfig` file, which makes it easier to maintain values separated by environment, such as `BASE_URL`, `BUNDLE_IDENTIFIER`, `APP_NAME`, and others.
+
+In our sample app, I created the *build configurations* `DebugProduction`, `DebugStaging`, `ReleaseProduction`, and `ReleaseStaging`.
+
+To do this, open the `.xcworkspace` file that is inside the iOS folder in your Xcode, click your project in the left sidebar, and then Project. On the Info tab, click the + icon and add the new *build configurations*. In the *screenshot* below, the sample app's *build configurations* are shown:
+
+![Build configurations](/images/blog/react-native-environments/build-configurations.png)
+
+Reference: https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+### Build schemes
+
+When you build, run, or test your app, Xcode uses the selected *build scheme* to determine what to do. A *build scheme* contains the settings that will affect the selected action. For example, when you build and run your app, the *scheme* tells Xcode which launch arguments will be passed to the app. Xcode creates default *schemes* most of the time, and you can customize those *schemes* or create a new one if needed.
+
+In the sample app, I renamed the default *scheme* to `BuildVariantsDevelopment`, and created the *schemes* `BuildVariantsStaging` and `BuildVariantsProduction`. You can see your app's *schemes* in the top bar of Xcode, as the image below shows:
+
+![Build schemes](/images/blog/react-native-environments/build-schemes.png)
+
+You can create or edit a *scheme* through the window that opens when you click the *build scheme* in the top bar, or by clicking "Manage Schemes".
+
+For each *build scheme*, associate a corresponding *build configuration*. In the "Run" section, associate the debug *build configuration* of the *scheme*. In the "Archive" section, associate the release *build configuration* of the *scheme,* as can be seen in the sample app's *screenshots* below:
+
+![Run](/images/blog/react-native-environments/scheme-run.png)
+
+![Archive](/images/blog/react-native-environments/scheme-archive.png)
+
+Reference: https://developer.apple.com/documentation/xcode/customizing-the-build-schemes-for-a-project
+
+### Bundle identifier
+
+To choose a specific *bundle identifier* for each variant of your app, click your app under "Targets", and on the "General" tab find the "Identity" section. In this section, set the *bundle identifier* you want for each *build configuration*. In the sample app, the *bundle identifier* was set to `com.buildvariants.dev` for the development variant, `com.buildvariants.staging` for the staging variant, and `com.buildvariants` for the production variant, as the image below shows:
+
+![Bundle identifier](/images/blog/react-native-environments/bundle-identifier.png)
+
+### App name
+
+To choose a specific name for each variant of your app, click your app under "Targets", and on the "Build Settings" tab click the + icon in the top bar and add a new **User-Defined Setting** called `APP_DISPLAY_NAME`. In that **User-Defined setting**, choose a specific name for each *build configuration*. In the sample app, I chose the names "DevBuildVariants" for the development variant, "StagingBuildVariants" for the staging variant, and "BuildVariants" for the production variant. This can be seen in the image below:
+
+![Build settings](/images/blog/react-native-environments/build-settings.png)
+
+After that, click the "Info" tab and, for the "Bundle display name" key, add the value `$(APP_DISPLAY_NAME)`, as the image below shows:
+
+![Bundle display name](/images/blog/react-native-environments/bundle-display-name.png)
+
+### App icon
+
+To choose a specific icon for each variant of the app, you first need to add the icons in "Images", in your project. Then you need to link each variant to its icon. In the sample app, one icon was configured for the production variant, and another for the development and staging variants. To do this, first click your project in the left sidebar, open the folder named after your project, and click "Images". Click "AppIcon" and add your production icon, then add a new **iOS App Icon** called "AppIconStaging" by clicking the + icon in the bottom bar, and add your development/staging icon. In the image below, the sample app's development/staging icon can be seen:
+
+![Icon](/images/blog/react-native-environments/app-icon.png)
+
+After that, click your app under "Targets", and on the "General" tab find the "App Icons and Launch Screen" section. In this section, choose the corresponding icon for each *build configuration*. The image below shows this section in the sample app:
+
+![App icons and launch creen](/images/blog/react-native-environments/app-icons-launch-screen.png)
+
+### CocoaPods
+
+Finally, we need to map the *build configurations* we created to build configurations CocoaPods knows. This matters because CocoaPods needs to understand whether a given Xcode configuration should be treated as a debug build or a release build.
+
+To do this in the sample app, I added the following snippet at the top of the `Podfile`:
+
+```jsx
+project 'BuildVariants',
+ 'Debug' => :debug,
+ 'Release' => :release,
+ 'DebugProduction' => :debug,
+ 'ReleaseProduction' => :release,
+ 'DebugStaging' => :debug,
+ 'ReleaseStaging' => :release
+```
+
+Reference: https://guides.cocoapods.org/syntax/podfile.html#project
+
+## React Native Config
+
+To configure different environment variables for each environment of our app, install the [react-native-config](https://github.com/lugg/react-native-config) library following the documentation, and create the `.env`, `.env.staging`, and `.env.production` files at the root of your project. In each file, define the environment variables for that environment. For Android and iOS to load the environment variables correctly, a few extra steps are required. Those steps, which were followed in the sample app, are described below.
+
+**Android**
+
+In addition, we need to apply a plugin in the app manually. In the `android/app/build.gradle` file, the following line was added as the second line of the file:
+
+```jsx
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+```
+
+To support different *build variants*, the following line was added inside `defaultConfig` in the same file:
+
+```jsx
+defaultConfig {
+    // ...
+    resValue "string", "build_config_package", "com.buildvariants"
+}
+```
+
+So that Android knows which environment variables to use for each *flavor*, in the `android/app/build.gradle` file, associate each *product flavor* with its `.env` file. Do this before the `apply from` added earlier, as the sample app's code snippet below shows:
+
+```jsx
+project.ext.envConfigFiles = [
+    development: ".env",
+    staging: ".env.staging"
+    production: ".env.production",
+]
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+```
+
+If you have *product flavors* with compound names, you must define them in this configuration using *lowercase*.
+
+Reference: https://github.com/lugg/react-native-config?tab=readme-ov-file#different-environments
+
+**iOS**
+
+For iOS to load the environment variables correctly, link each *build configuration* to its `.env` file. To do this, the following snippet was added at the end of the sample app's `Podfile`:
+
+```jsx
+// ...
+
+target 'BuildVariants' do
+  // ...
+
+  ENVFILES = {
+    'Debug' => '$(PODS_ROOT)/../../.env',
+    'DebugStaging' => '$(PODS_ROOT)/../../.env.staging',
+    'DebugProduction' => '$(PODS_ROOT)/../../.env.production',
+    'Release' => '$(PODS_ROOT)/../../.env',
+    'ReleaseStaging' => '$(PODS_ROOT)/../../.env.staging',
+    'ReleaseProduction' => '$(PODS_ROOT)/../../.env.production',
+  }
+
+  post_install do |installer|
+    // ...
+    
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        if target.name == 'react-native-config'
+          config.build_settings['ENVFILE'] = ENVFILES[config.name]
+        end
+      end
+    end
+  end
+end
+```
+
+Reference: https://github.com/lugg/react-native-config?tab=readme-ov-file#different-environments
+
+## Build scripts
+
+To make it easier to build each variant, add a script for each one in the `package.json` file.
+
+**Android**
+
+Use the `mode` flag to specify the *build variant*, and the `appId` flag to specify the `applicationId` that should be opened on the device after the build. If it is not specified, the `applicationId` from `defaultConfig` will be used. The Android scripts created in the sample app can be seen below:
+
+```jsx
+{
+  "name": "buildvariants",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android --mode=developmentDebug --appId=com.buildvariants.dev",
+    "android-stg": "react-native run-android --mode=stagingDebug --appId=com.buildvariants.staging",
+    "android-prod": "react-native run-android --mode=productionDebug",
+  },
+  // ...
+}
+```
+
+Reference: https://github.com/react-native-community/cli/blob/main/packages/cli-platform-android/README.md#run-android
+
+**iOS**
+
+Use the `scheme` flag to specify the *build scheme*, and the `mode` flag to specify the *build configuration*. The iOS scripts created in the sample app can be seen below:
+
+```jsx
+{
+  "name": "buildvariants",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "ios": "react-native run-ios --scheme=BuildVariantsDevelopment --mode=Debug",
+    "ios-stg": "react-native run-ios --scheme=BuildVariantsStaging --mode=DebugStaging",
+    "ios-prod": "react-native run-ios --scheme=BuildVariantsProduction --mode=DebugProduction",
+  },
+  // ...
+}
+```
+
+Reference: https://github.com/react-native-community/cli/blob/main/packages/cli-platform-ios/README.md#run-ios
+
+## Conclusion
+
+Configuring build variants in React Native projects is an essential step for organizing and isolating the different environments the app will run in. With the approach presented in this article, it is possible to define names, icons, environment variables, and settings specific to each context, on both Android and iOS. The sample project available on GitHub can serve as a base for applying these settings in your own app. Comment with what you thought, or leave a question!

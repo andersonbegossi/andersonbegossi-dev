@@ -154,7 +154,7 @@ describe('screen metadata', () => {
 });
 
 describe('sitemap and robots', () => {
-  it('lists every static route in both locales and no placeholder article', () => {
+  it('lists every static route and the published article in both locales', () => {
     const origin = siteConfig.baseUrl;
 
     expect(sitemap().map((entry) => entry.url)).toEqual([
@@ -168,6 +168,8 @@ describe('sitemap and robots', () => {
       `${origin}/pt/projects/`,
       `${origin}/pt/blog/`,
       `${origin}/pt/contact/`,
+      `${origin}/blog/react-native-environments/`,
+      `${origin}/pt/blog/react-native-environments/`,
     ]);
   });
 
