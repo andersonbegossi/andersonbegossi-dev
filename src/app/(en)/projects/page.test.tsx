@@ -23,6 +23,12 @@ describe('Projects screen', () => {
 
     const site = screen.getByRole('article', { name: 'andersonbegossi.dev' });
     expect(within(site).getByText(/This website — a bilingual, themeable/)).toBeInTheDocument();
+    const shot = within(site).getByRole('img', { name: 'ab. mark' });
+    expect(shot.getAttribute('src')).toContain('andersonbegossi-dev.webp');
+    expect(shot).toHaveAttribute('width', '1280');
+    expect(shot).toHaveAttribute('height', '720');
+    expect(screen.queryByRole('img', { name: 'Marca ab.' })).not.toBeInTheDocument();
+    expect(screen.queryByText('site screenshot')).not.toBeInTheDocument();
     expect(
       within(within(site).getByRole('list', { name: /tech/i }))
         .getAllByRole('listitem')

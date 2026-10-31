@@ -7,8 +7,17 @@ export type Project = {
   name: string;
   desc: Record<Locale, string>;
   tech: readonly string[];
-  /** What the card's image placeholder says it is waiting for, until a real screenshot exists. */
-  placeholder: Record<Locale, string>;
+  /**
+   * Image for the card's 16:9 slot. Omitted when the project has none yet.
+   * `width` and `height` are the file's intrinsic pixels, so the slot can reserve
+   * its space before the image loads.
+   */
+  image?: {
+    src: string;
+    width: number;
+    height: number;
+    alt: Record<Locale, string>;
+  };
   /** Link policy (CONTEXT.md): omitted while the repository is not public. */
   github?: string;
   /** Omitted while nothing is actually deployed at the target. */
@@ -31,7 +40,15 @@ export const projects: readonly Project[] = [
       pt: 'Este site — portfólio e blog técnico bilíngue, com temas e foco em tipografia e performance.',
     },
     tech: ['Next.js', 'MDX', 'i18n'],
-    placeholder: { en: 'site screenshot', pt: 'screenshot do site' },
+    image: {
+      src: '/images/projects/andersonbegossi-dev.webp',
+      width: 1280,
+      height: 720,
+      alt: {
+        en: 'ab. mark',
+        pt: 'Marca ab.',
+      },
+    },
     github: siteConfig.repo,
   },
 ];
