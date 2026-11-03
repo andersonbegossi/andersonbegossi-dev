@@ -44,10 +44,13 @@ export function HomeScreen({ locale }: { locale: Locale }) {
           </div>
         </div>
 
+        {/* Hidden on purpose; uncomment to show the availability line again. */}
+        {/*
         <p className={styles.availability}>
           <span aria-hidden="true" className={styles.availabilityDot} />
           <span>{t.home.availability}</span>
         </p>
+        */}
 
         <div className={styles.actions}>
           <a

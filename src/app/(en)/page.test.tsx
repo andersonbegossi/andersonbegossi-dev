@@ -17,10 +17,10 @@ describe('Home screen', () => {
     expect(screen.getByAltText('Anderson Begossi')).toBeInTheDocument();
   });
 
-  it('shows that Anderson is open to work', () => {
+  it('keeps the availability line hidden', () => {
     renderRoute(<HomePage />);
 
-    expect(screen.getByText('open to new opportunities & freelance')).toBeInTheDocument();
+    expect(screen.queryByText('open to new opportunities & freelance')).not.toBeInTheDocument();
   });
 
   it('offers the committed resume PDF as a download', () => {
