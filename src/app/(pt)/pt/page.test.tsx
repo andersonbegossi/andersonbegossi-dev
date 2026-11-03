@@ -18,10 +18,10 @@ describe('Portuguese Home screen', () => {
     );
   });
 
-  it('shows the availability note in Portuguese', () => {
+  it('keeps the availability line hidden', () => {
     renderRoute(<HomePage />, PT_HOME);
 
-    expect(screen.getByText('aberto a oportunidades & freelance')).toBeInTheDocument();
+    expect(screen.queryByText('aberto a oportunidades & freelance')).not.toBeInTheDocument();
   });
 
   it('keeps its actions inside the Portuguese locale', () => {
