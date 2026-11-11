@@ -68,3 +68,4 @@ See `docs/adr/`:
 - 0007 — Biome for linting and formatting
 - 0008 — CSS Modules and no component library
 - 0009 — Contact form delivers via Web3Forms
+- 0010 — Page views via Vercel Web Analytics
