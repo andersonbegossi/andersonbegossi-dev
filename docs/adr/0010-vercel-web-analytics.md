@@ -21,10 +21,13 @@ Depend on `@vercel/analytics` and render `<Analytics />` from
 `@vercel/analytics/next` inside `RootDocument`. Each root layout therefore
 mounts it once, and no page mounts it again. The component is a client
 component and works with `output: 'export'`: it prerenders to nothing, then
-after hydration appends `/_vercel/insights/script.js` and reports the route
-from `usePathname`. It needs no route handler, rewrite, cookie, or server.
-Leave `mode` on `auto`, so a production build sends views and local
-development only logs them.
+after hydration appends the analytics script and reports the route from
+`usePathname`. With no platform config that script is
+`/_vercel/insights/script.js`. A Vercel build sets
+`NEXT_PUBLIC_VERCEL_OBSERVABILITY_CLIENT_CONFIG`, and the component uses the
+script and intake paths from that config instead. It needs no route handler,
+rewrite, cookie, or server. Leave `mode` on `auto`, so a production build
+sends views and local development only logs them.
 
 ## Consequences
 
@@ -35,9 +38,10 @@ development only logs them.
 - The script tag is not in the prerendered HTML. It appears in `document.head`
   after the client bundle runs. That is how `@vercel/analytics` 2.x injects
   it, and a static export still counts the view.
-- Vercel may set `NEXT_PUBLIC_VERCEL_OBSERVABILITY_CLIENT_CONFIG` at build time
-  so the script posts to its intake endpoint. The app does not hardcode that
-  path. A future Content-Security-Policy must allow
-  `/_vercel/insights/script.js` and the same-origin insights endpoint.
+- The script and intake URLs are not hardcoded. On a Vercel build they come
+  from the observability client config: a same-origin hashed script, plus its
+  view, event, and session endpoints. A local production build keeps
+  `/_vercel/insights/script.js`. A future Content-Security-Policy must allow
+  whichever of those same-origin paths the build actually emits.
 - One more runtime dependency, the host's own cookieless script. Not a
   component library (ADR 0008) and not a second analytics vendor.
