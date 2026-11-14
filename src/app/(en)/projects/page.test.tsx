@@ -13,13 +13,13 @@ describe('Projects screen', () => {
     expect(screen.getByText(/Personal projects and apps I’ve designed/)).toBeInTheDocument();
   });
 
-  it('shows only the andersonbegossi.dev card with description and tech chips', () => {
+  it('shows the andersonbegossi.dev and Nathan Minozzo cards', () => {
     renderRoute(<ProjectsPage />, PROJECTS);
 
     const cards = screen.getAllByRole('article');
     expect(
       cards.map((card) => within(card).getByRole('heading', { level: 2 }).textContent),
-    ).toEqual(['andersonbegossi.dev']);
+    ).toEqual(['andersonbegossi.dev', 'Nathan Minozzo']);
 
     const site = screen.getByRole('article', { name: 'andersonbegossi.dev' });
     expect(within(site).getByText(/This website — a bilingual, themeable/)).toBeInTheDocument();
@@ -34,25 +34,48 @@ describe('Projects screen', () => {
         .getAllByRole('listitem')
         .map((chip) => chip.textContent),
     ).toEqual(['Next.js', 'MDX', 'i18n']);
+
+    const nathan = screen.getByRole('article', { name: 'Nathan Minozzo' });
+    expect(
+      within(nathan).getByText(
+        'Portfolio for Nathan Minozzo, graphic designer and founder of Nozzo Studio — a fast, one-page static site built around branding and art direction.',
+      ),
+    ).toBeInTheDocument();
+    const logo = within(nathan).getByRole('img', { name: 'Nathan Minozzo portfolio logo' });
+    expect(logo.getAttribute('src')).toContain('nathan-minozzo.webp');
+    expect(logo).toHaveAttribute('width', '1280');
+    expect(logo).toHaveAttribute('height', '720');
+    expect(
+      screen.queryByRole('img', { name: 'Logo do portfólio de Nathan Minozzo' }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(within(nathan).getByRole('list', { name: /tech/i }))
+        .getAllByRole('listitem')
+        .map((chip) => chip.textContent),
+    ).toEqual(['Astro', 'TypeScript', 'SEO']);
   });
 
-  it('links andersonbegossi.dev to this repository and shows no Live buttons', () => {
+  it('links andersonbegossi.dev to this repository and Nathan Minozzo to the live site', () => {
     renderRoute(<ProjectsPage />, PROJECTS);
 
     const main = screen.getByRole('main');
+    const site = screen.getByRole('article', { name: 'andersonbegossi.dev' });
+    const nathan = screen.getByRole('article', { name: 'Nathan Minozzo' });
+
     const githubLinks = within(main).getAllByRole('link', { name: /GitHub/ });
     expect(githubLinks).toHaveLength(1);
     expect(githubLinks[0]).toHaveAttribute(
       'href',
       'https://github.com/andersonbegossi/andersonbegossi-dev',
     );
-    expect(
-      within(screen.getByRole('article', { name: 'andersonbegossi.dev' })).getByRole('link', {
-        name: /GitHub/,
-      }),
-    ).toBe(githubLinks[0]);
+    expect(within(site).getByRole('link', { name: /GitHub/ })).toBe(githubLinks[0]);
+    expect(within(site).queryByRole('link', { name: /Live/ })).not.toBeInTheDocument();
 
-    expect(within(main).queryByRole('link', { name: /Live/ })).not.toBeInTheDocument();
+    const live = within(nathan).getByRole('link', { name: /Live/ });
+    expect(live).toHaveAttribute('href', 'https://nozzo-studio.vercel.app');
+    expect(within(nathan).queryByRole('link', { name: /GitHub/ })).not.toBeInTheDocument();
+    expect(within(main).getAllByRole('link', { name: /Live/ })).toEqual([live]);
+
     for (const link of within(main).getAllByRole('link')) {
       expect(link.getAttribute('href')).not.toMatch(/ambegossi|apps\.apple\.com/);
     }

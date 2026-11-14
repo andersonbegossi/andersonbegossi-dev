@@ -62,6 +62,14 @@ describe('Home screen', () => {
     expect(
       within(selectedWork).getByText(/This website — a bilingual, themeable/),
     ).toBeInTheDocument();
+    expect(within(selectedWork).getByRole('link', { name: /Nathan Minozzo/ })).toHaveAttribute(
+      'href',
+      '/projects',
+    );
+    expect(
+      within(selectedWork).getByText(/Portfolio for Nathan Minozzo, graphic designer/),
+    ).toBeInTheDocument();
+    expect(within(selectedWork).getByText(/Astro · TypeScript · SEO/)).toBeInTheDocument();
     expect(within(selectedWork).queryByText(/Stewart Acid-Base/)).not.toBeInTheDocument();
     expect(within(selectedWork).getByRole('link', { name: /View all/ })).toHaveAttribute(
       'href',

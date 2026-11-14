@@ -26,10 +26,12 @@ export type Project = {
 
 /**
  * Copied from the design snapshot's `projectItems` in both locales, keeping
- * only the site's own card, renamed from the design's `begossi.dev` to the real
- * domain: the design's other cards (`stewart-acid-base`, `voce-mais-saude`,
- * `rn-monorepo-starter`) are not shown. andersonbegossi.dev links to this
- * repository, and gets no Live link until the domain resolves.
+ * only cards whose links resolve (CONTEXT.md). The design's other cards
+ * (`stewart-acid-base`, `voce-mais-saude`, `rn-monorepo-starter`) are not
+ * shown. andersonbegossi.dev is the design's `begossi.dev`, renamed to the
+ * real domain: it links to this repository and gets no Live link until the
+ * domain resolves. Nathan Minozzo links to the deployed portfolio and omits
+ * GitHub because that repository is private.
  */
 export const projects: readonly Project[] = [
   {
@@ -50,6 +52,25 @@ export const projects: readonly Project[] = [
       },
     },
     github: siteConfig.repo,
+  },
+  {
+    slug: 'nathan-minozzo',
+    name: 'Nathan Minozzo',
+    desc: {
+      en: 'Portfolio for Nathan Minozzo, graphic designer and founder of Nozzo Studio — a fast, one-page static site built around branding and art direction.',
+      pt: 'Portfólio do Nathan Minozzo, designer gráfico e fundador do Nozzo Studio — site estático de uma página, rápido e construído em torno de branding e direção de arte.',
+    },
+    tech: ['Astro', 'TypeScript', 'SEO'],
+    image: {
+      src: '/images/projects/nathan-minozzo.webp',
+      width: 1280,
+      height: 720,
+      alt: {
+        en: 'Nathan Minozzo portfolio logo',
+        pt: 'Logo do portfólio de Nathan Minozzo',
+      },
+    },
+    live: 'https://nozzo-studio.vercel.app',
   },
 ];
 

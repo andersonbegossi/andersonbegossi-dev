@@ -44,6 +44,13 @@ describe('Portuguese Home screen', () => {
     expect(
       within(selectedWork).getByText(/Este site — portfólio e blog técnico bilíngue/),
     ).toBeInTheDocument();
+    expect(
+      within(selectedWork).getByText(/Portfólio do Nathan Minozzo, designer gráfico/),
+    ).toBeInTheDocument();
+    expect(within(selectedWork).getByRole('link', { name: /Nathan Minozzo/ })).toHaveAttribute(
+      'href',
+      '/pt/projects',
+    );
     expect(within(selectedWork).getByRole('link', { name: /Ver todos/ })).toHaveAttribute(
       'href',
       '/pt/projects',
